@@ -1,0 +1,13 @@
+// @import "../../assets/styles/vars";
+
+.game-page {
+  width: 480px;
+  height: 480px;
+  display: flex;
+  background-color: red;
+
+  &__box {
+    width: 60px;
+    height: 60px;
+  }
+}

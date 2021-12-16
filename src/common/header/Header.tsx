@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderLayout } from "../../assets/layouts/header-layout/HeaderLayout";
+import { HeaderLayout } from "../../layouts/header-layout/HeaderLayout";
 
 export const Header = () => {
   return (

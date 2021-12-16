@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "../../../common/header";
+import { Header } from "../../common/header";
 import styles from "./enter-page.module.scss";
 
 export const EnterPage = () => {

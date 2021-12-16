@@ -11,11 +11,16 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "public", "index.html"),
+      template: path.join(__dirname, "public/index.html"),
     }),
   ],
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        use: "babel-loader",
+        exclude: [/node_modules/],
+      },
       { test: /\.ts|tsx$/, use: "ts-loader" },
       {
         test: /\.ts|tsx$/,
@@ -28,21 +33,45 @@ module.exports = {
           "style-loader",
           {
             loader: "css-loader",
-            options: { modules: true },
+            options: {
+              auto: true,
+              exportGlobals: true,
+              modules: true,
+              importLoaders: 1,
+              localIdentName: "[name]_[local]_[hash:base64]",
+              sourceMap: true,
+              minimize: true,
+              exportLocalsConvention: "camelCase",
+            },
           },
         ],
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.module.scss$/i,
         use: [
           "style-loader",
           {
+            loader: "css-modules-typescript-loader",
+          },
+          {
             loader: "css-loader",
             options: {
-              esModule: true,
+              importLoaders: 1,
+              sourceMap: true,
+              modules: {
+                auto: true,
+                exportGlobals: true,
+                localIdentName: "[local]_[hash:base64:5]",
+                exportLocalsConvention: "camelCase",
+              },
             },
           },
-          "sass-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
         ],
       },
       {
@@ -53,7 +82,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "~": path.resolve("./src"),
+      ["~"]: path.resolve("./src"),
+      ["pages"]: path.resolve("./src/pages/"),
     },
     extensions: [".tsx", ".ts", ".js", ".html", ".css", ".scss"],
   },

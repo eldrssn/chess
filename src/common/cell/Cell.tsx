@@ -12,7 +12,7 @@ import { getPieceImageSource } from "utils/helpers";
 import { setChoosenPiece } from "store/reducers/turnsAndRules/actions";
 import { selectTurnsAndRules } from "store/reducers/turnsAndRules/selectors";
 
-import { ActionProps } from "store/reducers/turnsAndRules/types";
+import { AppDispatch } from "store/configureStore/types";
 import { CellProps } from "./types";
 
 import styles from "./cell.module.scss";
@@ -24,7 +24,7 @@ export const Cell: FC<CellProps> = ({ cell, piece, choosenCell }) => {
     useTypedSelector(selectTurnsAndRules);
 
   const isWhite = getIsWhite(cell);
-  const dispatch: Dispatch<ActionProps> = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const pieceImageSource = getPieceImageSource(piece);
 

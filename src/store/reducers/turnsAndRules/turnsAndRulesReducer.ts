@@ -1,5 +1,11 @@
+import { Reducer } from "redux";
 import { initialTurnsAndRules } from "store/reducers/turnsAndRules/initialTurnsAndRules.config";
-import { ActionHandlerProps, ReducerTurnsAndRulesProps, types } from "./types";
+import {
+  ActionHandlerProps,
+  ActionTurnsAndRulesProps,
+  StateTurnsAndRulesProps,
+  types,
+} from "./types";
 
 // редьюсер, который будет отвечать за то, чей ход, какая фигура куда переместилась итд
 const ACTION_HANDLERS: ActionHandlerProps = {
@@ -9,10 +15,10 @@ const ACTION_HANDLERS: ActionHandlerProps = {
   },
 };
 
-export const turnsAndRules: ReducerTurnsAndRulesProps = (
-  state = initialTurnsAndRules,
-  action
-) => {
+export const turnsAndRules: Reducer<
+  StateTurnsAndRulesProps,
+  ActionTurnsAndRulesProps
+> = (state = initialTurnsAndRules, action) => {
   return ACTION_HANDLERS[action.type]
     ? ACTION_HANDLERS[action.type](state, action)
     : state;

@@ -1,7 +1,9 @@
-import { withAppData } from "hocs/withAppData";
 import React from "react";
-import { AppLayout } from "./layouts/app-layout/AppLayout";
+
+import { withAppData } from "hocs/withAppData";
 import { Routing } from "./routing";
+
+import { AppLayout } from "./layouts/app-layout/AppLayout";
 
 function App() {
   return (

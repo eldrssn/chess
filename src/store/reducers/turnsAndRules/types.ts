@@ -1,3 +1,5 @@
+import { Reducer } from "redux";
+
 export enum types {
   setChoosenPiece = "SET_CHOOSEN_PIECE",
 }
@@ -19,13 +21,13 @@ export type ActionTurnsAndRulesProps = {
   payload?: any;
 };
 
-export type ReducerTurnsAndRulesProps = (
-  state: StateTurnsAndRulesProps,
-  action: ActionTurnsAndRulesProps
-) => StateTurnsAndRulesProps;
+// export type ReducerTurnsAndRulesProps = (
+//   state: StateTurnsAndRulesProps,
+//   action: ActionTurnsAndRulesProps
+// ) => StateTurnsAndRulesProps;
 
 export type ActionHandlerProps = {
-  SET_CHOOSEN_PIECE: ReducerTurnsAndRulesProps;
+  SET_CHOOSEN_PIECE: Reducer<StateTurnsAndRulesProps>;
 };
 
 export interface PayloadTurnsAndRulesProps {

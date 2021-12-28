@@ -5,13 +5,5 @@ import styles from "./app-layout.module.scss";
 const cn = classnames.bind(styles);
 
 export const AppLayout: React.FC = ({ children }) => {
-  return <main className={cn("app")}>{children}</main>;
+  return <div className={styles.app}>{children}</div>;
 };
-
-// AppLayout.Form = ({children}) => {
-//   return (
-//     <form className={cn('form')}>
-//       {children}
-//     </form>
-//     )
-// }

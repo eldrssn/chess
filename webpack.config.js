@@ -47,7 +47,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.module.scss$/i,
+        test: /\.scss$/i,
         use: [
           "style-loader",
           {
@@ -81,9 +81,9 @@ module.exports = {
     ],
   },
   resolve: {
+    modules: [path.join(__dirname, "src"), "node_modules"],
     alias: {
-      ["~"]: path.resolve("./src"),
-      ["pages"]: path.resolve("./src/pages/"),
+      src: path.resolve(__dirname, "./src"),
     },
     extensions: [".tsx", ".ts", ".js", ".html", ".css", ".scss"],
   },

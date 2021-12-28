@@ -1,4 +1,12 @@
 .header {
-  min-height: 80px;
-  background-color: blue;
+  padding: 20px;
+  background-color: #312e2b;
+  color: #ffffffa6;
+  box-shadow: 0px 2px 10px 4px #5a544e;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
 }

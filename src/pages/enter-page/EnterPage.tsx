@@ -7,7 +7,6 @@ export const EnterPage = () => {
     <div>
       <Header />
       <form className={styles.form}>
-        {/* <AppLayout.Form> */}
         <label className={styles["form-decription"]} htmlFor="name">
           Ваше имя?
         </label>
@@ -16,7 +15,6 @@ export const EnterPage = () => {
           Отправить
         </button>
       </form>
-      {/* </AppLayout.Form> */}
     </div>
   );
 };

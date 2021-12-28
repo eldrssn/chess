@@ -1,6 +1,6 @@
-import { StateProps, TURN } from "./types";
+import { StateTurnsAndRulesProps, TURN } from "./types";
 
-export const initialTurnsAndRules: StateProps = {
+export const initialTurnsAndRules: StateTurnsAndRulesProps = {
   choosenPiece: null,
   fromCell: null,
   moveToCell: null,

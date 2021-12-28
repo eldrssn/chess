@@ -7,21 +7,35 @@ export enum TURN {
   BLACK = "black",
 }
 
-export type StateProps = {
-  choosenPiece?: null | string;
-  fromCell?: null | string;
-  moveToCell?: null | string;
-  whoseTurn?: TURN;
-};
-
-export interface TurnsAndRulesProps {
+export interface StateTurnsAndRulesProps {
   choosenPiece: null | string;
   fromCell: null | string;
   moveToCell: null | string;
   whoseTurn: TURN;
 }
 
-export type ActionProps = {
+export type ActionTurnsAndRulesProps = {
   type: types;
-  payload: StateProps;
+  payload?: any;
+};
+
+export type ReducerTurnsAndRulesProps = (
+  state: StateTurnsAndRulesProps,
+  action: ActionTurnsAndRulesProps
+) => StateTurnsAndRulesProps;
+
+export type ActionHandlerProps = {
+  SET_CHOOSEN_PIECE: ReducerTurnsAndRulesProps;
+};
+
+export interface PayloadTurnsAndRulesProps {
+  choosenPiece?: null | string;
+  fromCell?: null | string;
+  moveToCell?: null | string;
+  whoseTurn?: TURN;
+}
+
+export type setChoosenPieceProps = (payload: PayloadTurnsAndRulesProps) => {
+  type: types.setChoosenPiece;
+  payload: PayloadTurnsAndRulesProps;
 };

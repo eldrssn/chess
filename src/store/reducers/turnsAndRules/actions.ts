@@ -1,9 +1,4 @@
-import { StateProps, types } from "./types";
-
-export type setChoosenPieceProps = (payload: StateProps) => {
-  type: types.setChoosenPiece;
-  payload: StateProps;
-};
+import { setChoosenPieceProps, types } from "./types";
 
 export const setChoosenPiece: setChoosenPieceProps = (payload) => {
   return {

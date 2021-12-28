@@ -11,6 +11,7 @@ interface ActionPositionProps {
   type: types;
   payload?: any;
 }
+
 export type ReducerPositionProps = (
   state: StatePositionProps,
   action: ActionPositionProps

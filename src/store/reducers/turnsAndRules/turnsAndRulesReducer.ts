@@ -1,17 +1,17 @@
 import { initialTurnsAndRules } from "store/reducers/turnsAndRules/initialTurnsAndRules.config";
-import { ActionProps, StateProps, types } from "./types";
+import { ActionHandlerProps, ReducerTurnsAndRulesProps, types } from "./types";
 
 // редьюсер, который будет отвечать за то, чей ход, какая фигура куда переместилась итд
-const ACTION_HANDLERS = {
-  [types.setChoosenPiece]: (state: StateProps, action: ActionProps) => {
+const ACTION_HANDLERS: ActionHandlerProps = {
+  [types.setChoosenPiece]: (state, action) => {
     console.log(state);
     return { ...state, ...action.payload };
   },
 };
 
-export const turnsAndRules = (
-  state: StateProps = initialTurnsAndRules,
-  action: ActionProps
+export const turnsAndRules: ReducerTurnsAndRulesProps = (
+  state = initialTurnsAndRules,
+  action
 ) => {
   return ACTION_HANDLERS[action.type]
     ? ACTION_HANDLERS[action.type](state, action)

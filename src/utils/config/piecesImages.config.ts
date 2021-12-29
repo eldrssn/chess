@@ -1,4 +1,4 @@
-import { PiecesImagesProps } from "./types";
+import { PiecesImagesProps } from "../types";
 
 export const piecesImages: PiecesImagesProps = {
   white_pawn: "./assets/svg/chess/pawn-white.svg",

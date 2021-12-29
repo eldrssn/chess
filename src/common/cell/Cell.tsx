@@ -7,7 +7,7 @@ import { useTypedSelector } from "hooks/useTypedSelector";
 
 import { getIsWhite } from "./helpers/getIsWhite";
 import { isChoosenCell } from "./helpers/isChoosenCell";
-import { getPieceImageSource } from "utils/helpers";
+import { getPieceImageSource } from "utils/getPieceImageSource";
 
 import { setChoosenPiece } from "store/reducers/turnsAndRules/actions";
 import { selectTurnsAndRules } from "store/reducers/turnsAndRules/selectors";

@@ -1,6 +1,6 @@
-import { setChoosenPieceProps, types } from "./types";
+import { types } from "./types";
 
-export const setChoosenPiece: setChoosenPieceProps = (payload) => {
+export const setChoosenPiece = (payload) => {
   return {
     type: types.setChoosenPiece,
     payload,

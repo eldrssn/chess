@@ -1,13 +1,8 @@
 import { types } from "./types";
 
-export const setDefaultSchemaPosition = () => {
+export const setDefaultSchemaPosition = (payload) => {
   return {
     type: types.setDefaultSchemaPosition,
-  };
-};
-
-export const updateSchemaPosition = () => {
-  return {
-    type: types.updateSchemaPosition,
+    payload: null
   };
 };

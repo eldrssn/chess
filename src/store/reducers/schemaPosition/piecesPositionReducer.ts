@@ -7,12 +7,10 @@ import {
   types,
 } from "./types";
 
-// редьюсер, который отрисовывает фигуры на доске
 const ACTION_HANDLERS: ActionHandlerProps = {
   [types.setDefaultSchemaPosition]: (state, action) => {
-    return { ...state };
-  },
-  [types.updateSchemaPosition]: (state, action) => {
+    console.log(action.type);
+    
     return { ...state };
   },
 };

@@ -7,7 +7,6 @@ import {
   types,
 } from "./types";
 
-// редьюсер, который будет отвечать за то, чей ход, какая фигура куда переместилась итд
 const ACTION_HANDLERS: ActionHandlerProps = {
   [types.setChoosenPiece]: (state, action) => {
     console.log(state);

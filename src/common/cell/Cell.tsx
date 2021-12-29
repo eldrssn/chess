@@ -7,7 +7,6 @@ import { useTypedSelector } from "hooks/useTypedSelector";
 
 import { getIsWhite } from "./helpers/getIsWhite";
 import { isChoosenCell } from "./helpers/isChoosenCell";
-import { getPieceImageSource } from "utils/getPieceImageSource";
 
 import { setChoosenPiece } from "store/reducers/turnsAndRules/actions";
 import { selectTurnsAndRules } from "store/reducers/turnsAndRules/selectors";
@@ -16,6 +15,7 @@ import { AppDispatch } from "store/configureStore/types";
 import { CellProps } from "./types";
 
 import styles from "./cell.module.scss";
+import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 
 const cn = classNames.bind(styles);
 

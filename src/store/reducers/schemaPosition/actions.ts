@@ -1,8 +1,8 @@
-import { types } from "./types";
+import { typesOfSchemaPosition } from "types/store";
 
 export const setDefaultSchemaPosition = (payload) => {
   return {
-    type: types.setDefaultSchemaPosition,
+    type: typesOfSchemaPosition.setDefaultSchemaPosition,
     payload: null
   };
 };

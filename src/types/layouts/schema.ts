@@ -1,4 +1,4 @@
-import { SchemaEventProps } from "common/dashboard/types";
+import { SchemaEventProps } from "types/common/dashboard";
 
 export interface SchemaLayoutProps {
   onClick: (event: SchemaEventProps) => void;

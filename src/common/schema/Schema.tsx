@@ -1,11 +1,15 @@
-import React, { FC } from "react";
-import { selectPiecesPosition } from "store/reducers/schemaPosition/selectors";
-import { Cell } from "../cell";
-import { getBoardArray } from "./helpers/getBoardArray";
-import { useTypedSelector } from "hooks/useTypedSelector";
-import { SchemaProps } from "./types";
+import React from "react";
 
-export const Schema: FC<SchemaProps> = ({ choosenCell }) => {
+import { useTypedSelector } from "hooks/useTypedSelector";
+import { selectPiecesPosition } from "store/reducers/schemaPosition/selectors";
+
+import { Cell } from "../cell";
+
+import { getBoardArray } from "./helpers/getBoardArray";
+
+import { SchemaProps } from "types/common";
+
+export const Schema: React.FC<SchemaProps> = ({ choosenCell }) => {
   const schema = getBoardArray(true);
 
   const piecesPosition = useTypedSelector(selectPiecesPosition);

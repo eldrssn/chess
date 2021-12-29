@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import { Schema } from "common/schema";
 import { SchemaLayout } from "layouts/schema-layout";
-import { SchemaEventProps } from "./types";
+
+import { SchemaEventProps } from "types/common";
 
 export const Dashboard = () => {
   const [choosenCell, setChoosenCell] = useState<string>("");

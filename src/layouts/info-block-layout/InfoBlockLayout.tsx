@@ -1,7 +1,9 @@
 import React from "react";
 import classNames from "classnames/bind";
+
+import { InfoBlockLayoutProps } from "types/layouts";
+
 import styles from "./info-block-layout.module.scss";
-import { InfoBlockLayoutProps } from "./types";
 
 const cn = classNames.bind(styles);
 

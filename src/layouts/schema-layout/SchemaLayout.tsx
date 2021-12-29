@@ -1,8 +1,10 @@
-import React, { FC } from "react";
-import styles from "./schema-layout.module.scss";
-import { SchemaLayoutProps } from "./types";
+import React from "react";
 
-export const SchemaLayout: FC<SchemaLayoutProps> = ({ onClick, children }) => {
+import { SchemaLayoutProps } from "types/layouts";
+
+import styles from "./schema-layout.module.scss";
+
+export const SchemaLayout: React.FC<SchemaLayoutProps> = ({ onClick, children }) => {
   return (
     <div onClick={onClick} className={styles.schema}>
       {children}

@@ -1,6 +1,4 @@
-import { StatePositionProps } from "./types";
-
-export const initialPositionState: StatePositionProps = {
+export const initialPositionState = {
   a1: "white_rook",
   b1: "white_knight",
   c1: "white_bishop",

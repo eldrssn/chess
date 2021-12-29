@@ -1,4 +1,4 @@
-import React, { Dispatch, FC } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 
 import classNames from "classnames/bind";
@@ -11,15 +11,16 @@ import { isChoosenCell } from "./helpers/isChoosenCell";
 import { setChoosenPiece } from "store/reducers/turnsAndRules/actions";
 import { selectTurnsAndRules } from "store/reducers/turnsAndRules/selectors";
 
-import { AppDispatch } from "store/configureStore/types";
-import { CellProps } from "./types";
+import { AppDispatch } from "types/store";
+import { CellProps } from "types/common";
+
+import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 
 import styles from "./cell.module.scss";
-import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 
 const cn = classNames.bind(styles);
 
-export const Cell: FC<CellProps> = ({ cell, piece, choosenCell }) => {
+export const Cell: React.FC<CellProps> = ({ cell, piece, choosenCell }) => {
   const { fromCell, choosenPiece, moveToCell } =
     useTypedSelector(selectTurnsAndRules);
 

@@ -1,14 +1,16 @@
 import { Reducer } from "redux";
+
 import { initialTurnsAndRules } from "store/reducers/turnsAndRules/initialTurnsAndRules.config";
+
 import {
-  ActionHandlerProps,
+  ActionHandlerTurnsAndRulesProps,
   ActionTurnsAndRulesProps,
   StateTurnsAndRulesProps,
-  types,
-} from "./types";
+  typesOfTurnAndRules,
+} from "types/store";
 
-const ACTION_HANDLERS: ActionHandlerProps = {
-  [types.setChoosenPiece]: (state, action) => {
+const ACTION_HANDLERS: ActionHandlerTurnsAndRulesProps = {
+  [typesOfTurnAndRules.setChoosenPiece]: (state, action) => {
     console.log(state);
     return { ...state, ...action.payload };
   },

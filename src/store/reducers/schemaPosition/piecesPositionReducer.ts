@@ -1,14 +1,11 @@
 import { Reducer } from "redux";
-import { initialPositionState } from "store/reducers/schemaPosition/initialPositionState.config";
-import {
-  ActionHandlerProps,
-  ActionPositionProps,
-  StatePositionProps,
-  types,
-} from "./types";
 
-const ACTION_HANDLERS: ActionHandlerProps = {
-  [types.setDefaultSchemaPosition]: (state, action) => {
+import { initialPositionState } from "store/reducers/schemaPosition/initialPositionState.config";
+import { ActionHandlerSchemaPositionProps, ActionPositionProps, StatePositionProps, typesOfSchemaPosition } from "types/store";
+
+
+const ACTION_HANDLERS: ActionHandlerSchemaPositionProps = {
+  [typesOfSchemaPosition.setDefaultSchemaPosition]: (state, action) => {
     console.log(action.type);
     
     return { ...state };

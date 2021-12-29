@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 
-export enum types {
+export enum typesOfSchemaPosition {
   setDefaultSchemaPosition = "SET_DEFAULT_SCHEMA_POSITION",
   updateSchemaPosition = "UPDATE_SCHEMA_POSITION",
 }
@@ -10,11 +10,11 @@ export type StatePositionProps = {
 };
 
 export interface ActionSetDefaultPositionProps {
-  type: types.setDefaultSchemaPosition,
+  type: typesOfSchemaPosition.setDefaultSchemaPosition,
 }
 
 export type ActionPositionProps = ActionSetDefaultPositionProps; 
 
-export type ActionHandlerProps = {
+export type ActionHandlerSchemaPositionProps = {
   SET_DEFAULT_SCHEMA_POSITION: Reducer<StatePositionProps>;
 };

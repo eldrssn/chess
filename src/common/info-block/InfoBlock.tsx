@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { InfoBlockLayout } from "layouts/info-block-layout/InfoBlockLayout";
 
-import { InfoBlockProps } from "./types";
+import { InfoBlockProps } from "types/common";
 
 export const InfoBlock: FC<InfoBlockProps> = ({ isCurrentTurn }) => {
   return (

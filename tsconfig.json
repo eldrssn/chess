@@ -1,23 +1,35 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/",
+    "baseUrl": "src",
     "outDir": "./dist/",
-    "noImplicitAny": false,
-    "module": "esnext",
+    "rootDir": "src",
     "target": "es5",
-    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "esnext", "ES2015"],
+    "downlevelIteration": true,
     "allowJs": true,
     "declaration": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "rootDir": "./src",
-    "watch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ]
+    // "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "watch": true,
+    "jsx": "react-jsx",
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "plugins": [
+    {
+      "name": "typescript-tslint-plugin"
+    },
+    {
+      "name": "typescript-plugin-css-modules"
+    }
+  ],
+  "include": ["src"]
 }

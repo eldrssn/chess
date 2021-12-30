@@ -1,3 +1,1 @@
-import { RootState } from "store/configureStore/types";
-
-export const selectTurnsAndRules = (state: RootState) => state.turnsAndRules;
+export const selectTurnsAndRules = (state) => state.turnsAndRules;

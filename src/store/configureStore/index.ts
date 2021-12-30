@@ -1,1 +1,3 @@
-export { store as configureStore } from "./configureStore.dev";
+import store from "./configureStore.dev";
+
+export { store as configureStore };

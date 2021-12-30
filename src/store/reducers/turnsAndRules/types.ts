@@ -1,17 +1,22 @@
+import { Reducer } from "redux";
+import { ActionStore } from "types/store";
+
 export enum types {
   setChoosenPiece = "SET_CHOOSEN_PIECE",
 }
 
 export enum TURN {
-  WHITE = "white",
-  BLACK = "black",
+  WHITE = "WHITE",
+  BLACK = "BLACK",
 }
 
-export interface StateTurnsAndRulesProps {
+export type TurnType = keyof typeof TURN;
+
+export interface TurnsAndRulesState {
   choosenPiece: null | string;
   fromCell: null | string;
   moveToCell: null | string;
-  whoseTurn: TURN;
+  whoseTurn: TurnType;
 }
 
 export type ActionTurnsAndRulesProps = {
@@ -19,20 +24,16 @@ export type ActionTurnsAndRulesProps = {
   payload?: any;
 };
 
-export type ReducerTurnsAndRulesProps = (
-  state: StateTurnsAndRulesProps,
-  action: ActionTurnsAndRulesProps
-) => StateTurnsAndRulesProps;
-
-export type ActionHandlerProps = {
-  SET_CHOOSEN_PIECE: ReducerTurnsAndRulesProps;
-};
+export type ActionHandlerProps = Record<
+  string,
+  Reducer<TurnsAndRulesState, ActionStore>
+>;
 
 export interface PayloadTurnsAndRulesProps {
   choosenPiece?: null | string;
   fromCell?: null | string;
   moveToCell?: null | string;
-  whoseTurn?: TURN;
+  whoseTurn?: TurnType;
 }
 
 export type setChoosenPieceProps = (payload: PayloadTurnsAndRulesProps) => {

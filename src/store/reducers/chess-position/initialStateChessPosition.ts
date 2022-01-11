@@ -1,6 +1,4 @@
-import { TURN } from "store/reducers/turnsAndRules/types";
-
-const initialPositionState = {
+export const initialStateChessPosition = {
   a1: "white_rook",
   b1: "white_knight",
   c1: "white_bishop",
@@ -33,16 +31,4 @@ const initialPositionState = {
   f8: "black_bishop",
   g8: "black_knight",
   h8: "black_rook",
-};
-
-const initialTurnsAndRules = {
-  choosenPiece: null,
-  fromCell: null,
-  moveToCell: null,
-  whoseTurn: TURN.WHITE,
-};
-
-export const initialState = {
-  piecesPosition: initialPositionState,
-  turnsAndRules: initialTurnsAndRules,
 };

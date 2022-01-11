@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-
-import { piecesPosition } from "./schemaPosition/piecesPositionReducer";
-import { turnsAndRules } from "./turnsAndRules/turnsAndRulesReducer";
+import { chessPositionReducer } from "./chess-position/chessPositionReducer";
+import { currentMoveReducer } from "./current-move/currentMoveReducer";
 
 export const rootReducer = combineReducers({
-  piecesPosition,
-  turnsAndRules,
+  chessPosition: chessPositionReducer,
+  currentMove: currentMoveReducer,
 });

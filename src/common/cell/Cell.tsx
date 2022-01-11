@@ -1,4 +1,4 @@
-import React, { Dispatch, FC } from "react";
+import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 
 import classNames from "classnames/bind";
@@ -6,32 +6,47 @@ import classNames from "classnames/bind";
 import { useTypedSelector } from "hooks/useTypedSelector";
 
 import { getIsWhite } from "./helpers/getIsWhite";
-import { isChoosenCell } from "./helpers/isChoosenCell";
 import { getPieceImageSource } from "utils/helpers";
 
-import { setChoosenPiece } from "store/reducers/turnsAndRules/actions";
-import { selectTurnsAndRules } from "store/reducers/turnsAndRules/selectors";
-
 import { CellProps } from "./types";
+
+import {
+  capturePiece,
+  changeTurn,
+  setChoosenPiece,
+} from "store/reducers/current-move/actions";
+import { selectCurrentMove } from "store/reducers/current-move/selectors";
+import { updateChessPosition } from "store/reducers/chess-position/actions";
+import { selectChessPosition } from "store/reducers/chess-position/selectors";
 
 import styles from "./cell.module.scss";
 
 const cn = classNames.bind(styles);
 
-export const Cell: FC<CellProps> = ({ cell, piece, choosenCell }) => {
-  const { fromCell, choosenPiece, moveToCell } =
-    useTypedSelector(selectTurnsAndRules);
+export const Cell: FC<CellProps> = ({
+  cell,
+  piece,
+  choosenCell,
+  allowedCells,
+}) => {
+  const { fromCell, choosenPiece, moveToCell, chessColor } =
+    useTypedSelector(selectCurrentMove);
+  const chessPosition = useTypedSelector(selectChessPosition);
 
   const isWhite = getIsWhite(cell);
   const dispatch = useDispatch();
 
   const pieceImageSource = getPieceImageSource(piece);
 
-  const getCanCellClick = () => {
-    return isChoosenCell({ choosenCell, cell }) && !!piece;
-  };
+  console.log(allowedCells);
 
-  const isCanCellClick = getCanCellClick();
+  const isCanCellClick = () =>
+    choosenCell === cell && !!piece && piece.includes(chessColor);
+
+  const isPossibleMove = () =>
+    allowedCells.includes(cell) &&
+    !!choosenPiece &&
+    choosenPiece.includes(chessColor);
 
   const onClickCell = () => {
     dispatch(
@@ -40,6 +55,28 @@ export const Cell: FC<CellProps> = ({ cell, piece, choosenCell }) => {
         choosenPiece: piece,
       })
     );
+
+    if (
+      choosenCell &&
+      fromCell &&
+      choosenPiece &&
+      choosenPiece.includes(chessColor) &&
+      choosenCell !== cell &&
+      allowedCells.includes(cell)
+    ) {
+      // if (choosenCell === cell || !allowedCells.includes(cell)) {
+      //   return;
+      // }
+
+      if (chessPosition[cell] && allowedCells.includes(cell)) {
+        dispatch(capturePiece(chessPosition[cell]));
+      }
+
+      dispatch(
+        updateChessPosition({ choosenPiece, fromCell, moveToCell: cell })
+      );
+      dispatch(changeTurn());
+    }
   };
 
   return (
@@ -47,9 +84,8 @@ export const Cell: FC<CellProps> = ({ cell, piece, choosenCell }) => {
       className={cn(styles.cell, {
         [styles.cellBlack]: !isWhite,
         [styles.cellWhite]: isWhite,
-        [styles.cellClicked]: isCanCellClick,
-        // ниже уже написанный стиль для подцветки потенциальных ходов
-        // [styles.cellPossibleMove]: isPossibleMoveClick,
+        [styles.cellActive]: isCanCellClick(),
+        [styles.cellPossibleMove]: isPossibleMove(),
       })}
       id={cell}
       onClick={onClickCell}
@@ -64,7 +100,7 @@ export const Cell: FC<CellProps> = ({ cell, piece, choosenCell }) => {
           height={60}
         />
       )}
-      {/* <span>{cell}</span> */}
+      <span>{cell}</span>
     </div>
   );
 };

@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.form-decription {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.form-button {
+  padding: 10px;
+  margin-top: 10px;
+}

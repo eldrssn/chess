@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "outDir": "./dist/",
+    "noImplicitAny": false,
+    "module": "esnext",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "rootDir": "./src",
+    "watch": true,
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
+  },
+  "include": ["src/**/*", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}

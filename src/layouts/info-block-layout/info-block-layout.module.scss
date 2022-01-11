@@ -1,0 +1,23 @@
+@import "assets/styles/vars";
+
+.info-block {
+  width: 640px;
+  border: 5px solid transparent;
+  border-radius: 20px;
+  margin: 20px auto;
+  flex-grow: 1;
+  background-color: white;
+  padding: 10px;
+  max-height: 80px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: content-box;
+
+  &__current-turn {
+    border: 5px solid $black-cell-color;
+  }
+}

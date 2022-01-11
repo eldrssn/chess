@@ -1,0 +1,39 @@
+@import "assets/styles/vars";
+
+.cell {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  text-align: end;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  font-size: 14px;
+
+  &_black {
+    background-color: $black-cell-color;
+    color: $white-cell-color;
+  }
+
+  &_white {
+    background-color: $white-cell-color;
+    color: $black-cell-color;
+  }
+
+  &--clicked {
+    box-shadow: 0px 0px 12px 5px #26e650 inset;
+  }
+
+  &--possible-move {
+    box-shadow: 0px 0px 12px 5px #8c5de2d0 inset;
+  }
+
+  .piece-img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+}

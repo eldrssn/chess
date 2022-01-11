@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 
-import { Schema } from "common/schema";
-import { SchemaLayout } from "layouts/schema-layout";
-
-import { SchemaEventProps } from "types/common";
+import { Cells } from "common/cells";
+import { CellsEventProps } from "./types";
+import { CellsLayout } from "layouts/cells-layout";
 
 export const Dashboard = () => {
   const [choosenCell, setChoosenCell] = useState<string>("");
 
   // getChoosenCell
-  const onSchemaClick = (event: SchemaEventProps) => {
+  const onCellsClick = (event: CellsEventProps) => {
     setChoosenCell(event.target.id);
   };
 
   return (
-    <SchemaLayout onClick={onSchemaClick}>
-      <Schema choosenCell={choosenCell} />
-    </SchemaLayout>
+    <CellsLayout onClick={onCellsClick}>
+      <Cells choosenCell={choosenCell} />
+    </CellsLayout>
   );
 };

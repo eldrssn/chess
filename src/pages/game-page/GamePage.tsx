@@ -5,15 +5,16 @@ import { DashboardLayout } from "layouts/dashboard-layout";
 import { Header } from "common/header";
 import { Dashboard } from "common/dashboard";
 import { InfoBlock } from "common/info-block";
+import { CHESS_COLORS } from "store/reducers/current-move/types";
 
 export const GamePage: React.FC = () => {
   return (
     <>
       <Header />
       <DashboardLayout>
-        <InfoBlock isCurrentTurn={true} />
+        <InfoBlock turn={CHESS_COLORS.BLACK} />
         <Dashboard />
-        <InfoBlock isCurrentTurn={false} />
+        <InfoBlock turn={CHESS_COLORS.WHITE} />
       </DashboardLayout>
     </>
   );

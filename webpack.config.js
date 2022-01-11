@@ -22,11 +22,11 @@ module.exports = {
         exclude: [/node_modules/],
       },
       { test: /\.ts|tsx$/, use: "ts-loader" },
-      {
-        test: /\.ts|tsx$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-      },
+      // {
+      //   test: /\.ts|tsx$/,
+      //   exclude: /node_modules/,
+      //   loader: "babel-loader",
+      // },
       {
         test: /\.css$/i,
         use: [
@@ -38,7 +38,7 @@ module.exports = {
               exportGlobals: true,
               modules: true,
               importLoaders: 1,
-              localIdentName: "[name]_[local]_[hash:base64]",
+              localIdentName: "[local]_[hash:base64:5]",
               sourceMap: true,
               minimize: true,
               exportLocalsConvention: "camelCase",

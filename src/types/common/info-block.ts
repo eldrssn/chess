@@ -1,3 +1,3 @@
 export interface InfoBlockProps {
-  isCurrentTurn: boolean;
+  turn: string;
 }

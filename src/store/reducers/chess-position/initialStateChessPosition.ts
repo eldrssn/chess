@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/store/reducers/schemaPosition/initialPositionState.config.ts
 export const initialPositionState = {
+=======
+export const initialStateChessPosition = {
+>>>>>>> basic-schema:src/store/reducers/chess-position/initialStateChessPosition.ts
   a1: "white_rook",
   b1: "white_knight",
   c1: "white_bishop",

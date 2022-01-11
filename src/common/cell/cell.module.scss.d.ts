@@ -2,10 +2,10 @@
 // Please do not change this file!
 interface CssExports {
   'cell': string;
-  'cell--clicked': string;
-  'cell--possible-move': string;
+  'cell-active': string;
+  'cell-possible-move': string;
+  'cellActive': string;
   'cellBlack': string;
-  'cellClicked': string;
   'cellPossibleMove': string;
   'cellWhite': string;
   'cell_black': string;

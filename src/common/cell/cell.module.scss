@@ -20,11 +20,11 @@
     color: $black-cell-color;
   }
 
-  &--clicked {
+  &-active {
     box-shadow: 0px 0px 12px 5px #26e650 inset;
   }
 
-  &--possible-move {
+  &-possible-move {
     box-shadow: 0px 0px 12px 5px #8c5de2d0 inset;
   }
 

@@ -47,17 +47,18 @@ export const Dashboard = () => {
       );
     }
 
-    if (pieceName) {
+    if (pieceName === "rook") {
       return validateMoves(pieceName, choosenCell);
     }
-    // if (choosenCell) {
-    //   // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
-    //   return schema
-    //     .slice()
-    //     .filter((cell) =>
-    //       chessPosition[cell] ? !chessPosition[cell].includes(chessColor) : cell
-    //     );
-    // }
+
+    if (choosenCell) {
+      // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
+      return schema
+        .slice()
+        .filter((cell) =>
+          chessPosition[cell] ? !chessPosition[cell].includes(chessColor) : cell
+        );
+    }
   }, [choosenCell]);
 
   const allowedCells = getAllowedCells();

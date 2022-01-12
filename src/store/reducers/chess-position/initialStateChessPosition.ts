@@ -14,7 +14,7 @@ export const initialStateChessPosition = {
   // e2: "white_pawn",
   // f2: "white_pawn",
   // g2: "white_pawn",
-  // h2: "white_pawn",
+  h3: "white_pawn", //h2
   a7: "black_pawn",
   b7: "black_pawn",
   c7: "black_pawn",

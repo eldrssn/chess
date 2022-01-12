@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+
 import { EnterPage } from "../pages/enter-page";
 import { GamePage } from "../pages/game-page";
 

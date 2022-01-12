@@ -1,5 +1,7 @@
-import { UsernameFieldLayout } from "layouts/username-field-layout";
 import React from "react";
+
+import { UsernameFieldLayout } from "layouts/username-field-layout";
+
 import styles from "./username-field.module.scss";
 
 export const UsernameField = () => {

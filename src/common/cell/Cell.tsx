@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import classNames from "classnames/bind";
@@ -64,10 +64,6 @@ export const Cell: FC<CellProps> = ({
       choosenCell !== cell &&
       allowedCells.includes(cell)
     ) {
-      // if (choosenCell === cell || !allowedCells.includes(cell)) {
-      //   return;
-      // }
-
       if (chessPosition[cell] && allowedCells.includes(cell)) {
         dispatch(capturePiece(chessPosition[cell]));
       }

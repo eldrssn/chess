@@ -5,9 +5,9 @@ import { InfoBlockLayout } from "layouts/info-block-layout/InfoBlockLayout";
 import { InfoBlockProps } from "./types";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { selectCurrentMove } from "store/reducers/current-move/selectors";
-import { getPieceImageSource } from "utils/helpers";
 
 import styles from "./info-block.module.scss";
+import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 
 export const InfoBlock: FC<InfoBlockProps> = ({ turn }) => {
   const { chessColor, captureByBlack, captureByWhite } =

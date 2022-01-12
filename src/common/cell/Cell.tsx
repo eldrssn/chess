@@ -6,7 +6,6 @@ import classNames from "classnames/bind";
 import { useTypedSelector } from "hooks/useTypedSelector";
 
 import { getIsWhite } from "./helpers/getIsWhite";
-import { getPieceImageSource } from "utils/helpers";
 
 import { CellProps } from "./types";
 
@@ -20,6 +19,7 @@ import { updateChessPosition } from "store/reducers/chess-position/actions";
 import { selectChessPosition } from "store/reducers/chess-position/selectors";
 
 import styles from "./cell.module.scss";
+import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 
 const cn = classNames.bind(styles);
 

@@ -7,6 +7,9 @@ import { useTypedSelector } from "hooks/useTypedSelector";
 import { selectChessPosition } from "store/reducers/chess-position/selectors";
 import { getBoardArray } from "./helpers/getBoardArray";
 import { selectCurrentMove } from "store/reducers/current-move/selectors";
+import { whatPieceName } from "./helpers/whatPieceName";
+import { PIECES_NAMES } from "./helpers/constants";
+import { validateMoves } from "./helpers/validateMoves";
 
 const validateMove = ({ typeFigure, position, schema }) => {
   // !TODO: создать валидацию ходов для каждой фигуры через хешмапу
@@ -33,24 +36,31 @@ export const Dashboard = () => {
 
   const chessPosition = useTypedSelector(selectChessPosition);
 
-  const canClickCells = useCallback(() => {
+  const pieceName = whatPieceName(chessPosition[choosenCell]);
+
+  console.log(validateMoves(pieceName, choosenCell));
+
+  const getAllowedCells = useCallback(() => {
     if (!choosenCell) {
       return Object.keys(chessPosition).filter((cell) =>
         chessPosition[cell].includes(chessColor)
       );
     }
 
-    if (choosenCell) {
-      // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
-      return schema
-        .slice()
-        .filter((cell) =>
-          chessPosition[cell] ? !chessPosition[cell].includes(chessColor) : cell
-        );
+    if (pieceName) {
+      return validateMoves(pieceName, choosenCell);
     }
+    // if (choosenCell) {
+    //   // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
+    //   return schema
+    //     .slice()
+    //     .filter((cell) =>
+    //       chessPosition[cell] ? !chessPosition[cell].includes(chessColor) : cell
+    //     );
+    // }
   }, [choosenCell]);
 
-  const allowedCells = canClickCells();
+  const allowedCells = getAllowedCells();
 
   return (
     <CellsLayout onClick={onCellsClick}>

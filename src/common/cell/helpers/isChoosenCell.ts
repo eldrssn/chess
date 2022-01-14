@@ -1,4 +1,4 @@
-import { isChoosenCellProps } from "types/common/cell/helpers";
+import { isChoosenCellProps } from "./types";
 
 export const isChoosenCell = ({
   choosenCell,

@@ -1,24 +1,20 @@
-<<<<<<< HEAD:src/store/reducers/schemaPosition/initialPositionState.config.ts
-export const initialPositionState = {
-=======
 export const initialStateChessPosition = {
->>>>>>> basic-schema:src/store/reducers/chess-position/initialStateChessPosition.ts
-  a1: "white_rook",
-  b1: "white_knight",
-  c1: "white_bishop",
-  d1: "white_queen",
-  e1: "white_king",
-  f1: "white_bishop",
-  g1: "white_knight",
-  h1: "white_rook",
-  a2: "white_pawn",
-  b2: "white_pawn",
-  c2: "white_pawn",
-  d2: "white_pawn",
-  e2: "white_pawn",
-  f2: "white_pawn",
-  g2: "white_pawn",
-  h2: "white_pawn",
+  c3: "white_rook", //a1
+  // b1: "white_knight",
+  // c1: "white_bishop",
+  // d1: "white_queen",
+  // e1: "white_king",
+  // f1: "white_bishop",
+  // g1: "white_knight",
+  // h1: "white_rook",
+  // a2: "white_pawn",
+  // b2: "white_pawn",
+  // c2: "white_pawn",
+  // d2: "white_pawn",
+  // e2: "white_pawn",
+  // f2: "white_pawn",
+  // g2: "white_pawn",
+  h3: "white_pawn", //h2
   a7: "black_pawn",
   b7: "black_pawn",
   c7: "black_pawn",

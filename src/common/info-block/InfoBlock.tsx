@@ -5,17 +5,23 @@ import { InfoBlockLayout } from "layouts/info-block-layout/InfoBlockLayout";
 import { InfoBlockProps } from "./types";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { selectCurrentMove } from "store/reducers/current-move/selectors";
-import { getPieceImageSource } from "utils/helpers";
 
 import styles from "./info-block.module.scss";
+import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
+import { TURN } from "utils/constants";
 
 export const InfoBlock: FC<InfoBlockProps> = ({ turn }) => {
-  const { chessColor, captureByBlack, captureByWhite } =
-    useTypedSelector(selectCurrentMove);
+  const {
+    chessPlayerColor,
+    piecesCaptureByBlackChess,
+    piecesCaptureByWhiteChess,
+  } = useTypedSelector(selectCurrentMove);
 
-  const isTurn = chessColor === turn;
+  // !TODO: вынести в отдельную функцию
+  const isTurn = chessPlayerColor === turn;
 
-  const capturePieces = turn === "black" ? captureByBlack : captureByWhite;
+  const capturePieces =
+    turn === TURN.BLACK ? piecesCaptureByBlackChess : piecesCaptureByWhiteChess;
 
   return (
     <InfoBlockLayout isCurrentTurn={isTurn}>

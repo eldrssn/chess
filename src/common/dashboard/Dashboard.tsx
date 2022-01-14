@@ -1,77 +1,66 @@
 import React, { useCallback, useState } from "react";
 
-import { CellsEventProps } from "./types";
+import { selectCurrentMove } from "store/reducers/current-move/selectors";
+import { selectChessPosition } from "store/reducers/chess-position/selectors";
+
 import { CellsLayout } from "layouts/cells-layout";
 import { Cell } from "common/cell";
+
 import { useTypedSelector } from "hooks/useTypedSelector";
-import { selectChessPosition } from "store/reducers/chess-position/selectors";
-import { getBoardArray } from "./helpers/getBoardArray";
-import { selectCurrentMove } from "store/reducers/current-move/selectors";
-import { whatPieceName } from "./helpers/whatPieceName";
-import { PIECES_NAMES } from "./helpers/constants";
-import { validateMoves } from "./helpers/validateMoves";
 
-const validateMove = ({ typeFigure, position, schema }) => {
-  // !TODO: создать валидацию ходов для каждой фигуры через хешмапу
-  const figureValidations = {
-    ["rogue"]: (position) => {},
-    ["knight"]: () => {},
-    spawn: () => {},
-  };
+import { getBoardArray, getPieceTypeName, validateMoves } from "./helpers";
 
-  return figureValidations[typeFigure] || figureValidations["spawn"];
-};
+import { CellsEventProps } from "./types";
 
 export const Dashboard = () => {
-  const [choosenCell, setChoosenCell] = useState<string>("");
+  const [choosenCellPosition, setChoosenCellPosition] = useState<string>("");
 
-  // getChoosenCell
   const onCellsClick = (event: CellsEventProps) => {
-    setChoosenCell(event.target.id);
+    setChoosenCellPosition(event.target.id);
   };
 
   const schema = getBoardArray(true);
 
-  const { chessColor } = useTypedSelector(selectCurrentMove);
+  const { chessPlayerColor } = useTypedSelector(selectCurrentMove);
 
   const chessPosition = useTypedSelector(selectChessPosition);
 
-  const pieceName = whatPieceName(chessPosition[choosenCell]);
+  const pieceTypeName = getPieceTypeName(chessPosition[choosenCellPosition]);
 
-  console.log(validateMoves(pieceName, choosenCell));
-
-  const getAllowedCells = useCallback(() => {
-    if (!choosenCell) {
-      return Object.keys(chessPosition).filter((cell) =>
-        chessPosition[cell].includes(chessColor)
+  const getAllowedCellsPositions = useCallback(() => {
+    if (!choosenCellPosition) {
+      return Object.keys(chessPosition).filter((cellPosition) =>
+        chessPosition[cellPosition].includes(chessPlayerColor)
       );
     }
 
-    if (pieceName === "rook") {
-      return validateMoves(pieceName, choosenCell);
+    if (pieceTypeName === "rook") {
+      return validateMoves({ pieceTypeName, choosenCellPosition });
     }
 
-    if (choosenCell) {
+    if (choosenCellPosition) {
       // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
       return schema
         .slice()
         .filter((cell) =>
-          chessPosition[cell] ? !chessPosition[cell].includes(chessColor) : cell
+          chessPosition[cell]
+            ? !chessPosition[cell].includes(chessPlayerColor)
+            : cell
         );
     }
-  }, [choosenCell]);
+  }, [choosenCellPosition]);
 
-  const allowedCells = getAllowedCells();
+  const allowedCellsPosition = getAllowedCellsPositions();
 
   return (
     <CellsLayout onClick={onCellsClick}>
-      {schema.map((cell) => (
+      {schema.map((cellPosition) => (
         <Cell
-          key={cell}
-          cell={cell}
-          piece={chessPosition[cell]}
-          choosenCell={choosenCell}
-          allowedCells={allowedCells}
+          key={cellPosition}
+          cellPosition={cellPosition}
+          pieceType={chessPosition[cellPosition]}
+          choosenCellPosition={choosenCellPosition}
+          allowedCellsPositions={allowedCellsPosition}
         />
       ))}
     </CellsLayout>

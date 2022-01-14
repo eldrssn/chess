@@ -1,6 +1,6 @@
 export interface CellProps {
-  cell: string;
-  piece?: string;
-  choosenCell: string;
-  allowedCells: string[];
+  cellPosition: string;
+  pieceType?: string;
+  choosenCellPosition: string;
+  allowedCellsPositions: string[];
 }

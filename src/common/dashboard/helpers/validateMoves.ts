@@ -37,8 +37,11 @@ const pieceValidation = {
   },
 };
 
-export const validateMoves = (pieceName?: string, position?: string) => {
-  return pieceValidation[pieceName]
-    ? pieceValidation[pieceName](position)
+export const validateMoves = ({
+  pieceTypeName,
+  choosenCellPosition,
+}: Record<string, string>) => {
+  return pieceValidation[pieceTypeName]
+    ? pieceValidation[pieceTypeName](choosenCellPosition)
     : null;
 };

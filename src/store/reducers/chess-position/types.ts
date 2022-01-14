@@ -12,9 +12,9 @@ export interface IChessDefaultAction {
 }
 
 export type TUpdateChessPositionPayload = {
-  choosenPiece: string;
-  fromCell: string;
-  moveToCell: string;
+  choosenPieceType: string;
+  fromCellPosition: string;
+  toCellPosition: string;
 };
 
 export type TUpdateChessPositionAction = IAction<TUpdateChessPositionPayload>;

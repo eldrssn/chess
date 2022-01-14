@@ -1,10 +1,10 @@
 import { ICurrentMoveState, CHESS_COLORS } from "./types";
 
 export const initialCurrentMoveState: ICurrentMoveState = {
-  choosenPiece: null,
-  fromCell: null,
-  moveToCell: null,
-  chessColor: CHESS_COLORS.WHITE,
-  captureByBlack: [],
-  captureByWhite: [],
+  choosenPieceType: null,
+  fromCellPosition: null,
+  toCellPosition: null,
+  chessPlayerColor: CHESS_COLORS.WHITE,
+  captureByBlackChess: [],
+  captureByWhiteChess: [],
 };

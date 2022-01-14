@@ -21,12 +21,12 @@ export type TSetChoosenPiecePayload = {
 export type TCapturePiecePayload = string;
 
 export interface ICurrentMoveState {
-  choosenPiece: null | string;
-  fromCell: null | string;
-  moveToCell: null | string;
-  chessColor: COLOR;
-  captureByBlack: string[];
-  captureByWhite: string[];
+  choosenPieceType: null | string;
+  fromCellPosition: null | string;
+  toCellPosition: null | string;
+  chessPlayerColor: COLOR;
+  captureByBlackChess: string[];
+  captureByWhiteChess: string[];
 }
 
 // !TODO: добавлять сюда все экшены, которые будут или нет?

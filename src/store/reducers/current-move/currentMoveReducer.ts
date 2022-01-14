@@ -28,9 +28,17 @@ const ACTION_HANDLERS = {
     state: ICurrentMoveState,
     action: IAction<never>
   ) => {
-    return state.chessColor === CHESS_COLORS.WHITE
-      ? { ...state, chessColor: CHESS_COLORS.BLACK, choosenPiece: null }
-      : { ...state, chessColor: CHESS_COLORS.WHITE, choosenPiece: null };
+    return state.chessPlayerColor === CHESS_COLORS.WHITE
+      ? {
+          ...state,
+          chessPlayerColor: CHESS_COLORS.BLACK,
+          choosenPieceType: null,
+        }
+      : {
+          ...state,
+          chessPlayerColor: CHESS_COLORS.WHITE,
+          choosenPieceType: null,
+        };
   },
 
   [typesCurrentMove.CAPTURE_PIECE]: (
@@ -39,9 +47,9 @@ const ACTION_HANDLERS = {
   ) => {
     const piece = action.payload;
 
-    return state.chessColor === CHESS_COLORS.WHITE
-      ? { ...state, captureByWhite: [...state.captureByWhite, piece] }
-      : { ...state, captureByBlack: [...state.captureByBlack, piece] };
+    return state.chessPlayerColor === CHESS_COLORS.WHITE
+      ? { ...state, captureByWhite: [...state.captureByWhiteChess, piece] }
+      : { ...state, captureByBlack: [...state.captureByBlackChess, piece] };
   },
 };
 

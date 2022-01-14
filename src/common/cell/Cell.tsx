@@ -38,8 +38,6 @@ export const Cell: FC<CellProps> = ({
 
   const pieceImageSource = getPieceImageSource(piece);
 
-  // console.log(allowedCells);
-
   const isCanCellClick = () =>
     choosenCell === cell && !!piece && piece.includes(chessColor);
 

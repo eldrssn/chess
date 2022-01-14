@@ -1,5 +1,8 @@
 import { COLUMN_CHARS, ROW_NUMBERS, TURN } from "utils/constants";
 import { blackPawnDefaultRow, whitePawnDefaultRow } from "./constants";
+import { getCellsPositions } from "./getCellsPositions";
+import { getNextCellPosition } from "./getNextCellPosition";
+import { getPawnOffset } from "./getPawnOffset";
 import { isWhiteColor } from "./isWhiteColor";
 import { splitColorAndNamePiece } from "./splitColorAndNamePiece";
 
@@ -9,10 +12,10 @@ export const getPawnMoves = ({
   pieceColor,
   chessPosition,
 }) => {
-  const [currentColumn, currentRow] = currentPosition;
-  const currentRowIndex = ROW_NUMBERS.indexOf(currentRow);
-  const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
+  const [, currentRow] = currentPosition;
   const isWhite = isWhiteColor(pieceColor);
+  const pawnOffset = getPawnOffset(isWhite);
+  const pawnAlwaysOffset = pawnOffset.moves[0][0];
 
   const pawnMoves = [];
 
@@ -27,7 +30,7 @@ export const getPawnMoves = ({
     return true;
   };
 
-  const checkCanCapturePiece = ({ pawnMoves, capturePieceMoves }) => {
+  const makeCapturePiece = ({ pawnMoves, capturePieceMoves }) => {
     for (let i = 0; i < capturePieceMoves.length; i++) {
       const [nextPieceColor] = splitColorAndNamePiece(
         chessPosition,
@@ -39,33 +42,21 @@ export const getPawnMoves = ({
     }
   };
 
-  const nextCell = `${
-    COLUMN_CHARS[currentColumnIndex] +
-    ROW_NUMBERS[currentRowIndex + (isWhite ? -1 : 1)]
-  }`;
+  const nextCell = getNextCellPosition({
+    currentPosition,
+    rowOffset: pawnAlwaysOffset,
+  });
 
-  const capturePieceMoves = [
-    `${
-      COLUMN_CHARS[currentColumnIndex + 1] +
-      ROW_NUMBERS[currentRowIndex + (isWhite ? -1 : 1)]
-    }`,
-    `${
-      COLUMN_CHARS[currentColumnIndex - 1] +
-      ROW_NUMBERS[currentRowIndex + (isWhite ? -1 : 1)]
-    }`,
-  ];
+  const capturePieceMoves = getCellsPositions(
+    currentPosition,
+    pawnOffset.captureMoves
+  );
 
-  checkCanCapturePiece({ pawnMoves, capturePieceMoves });
+  makeCapturePiece({ pawnMoves, capturePieceMoves });
   checkValidPawnMove({ pawnMoves, nextCell });
 
   if (currentRow === (isWhite ? whitePawnDefaultRow : blackPawnDefaultRow)) {
-    const nextCells = [
-      nextCell,
-      `${
-        COLUMN_CHARS[currentColumnIndex] +
-        ROW_NUMBERS[currentRowIndex + (isWhite ? -2 : 2)]
-      }`,
-    ];
+    const nextCells = getCellsPositions(currentPosition, pawnOffset.moves);
 
     for (let i = 0; i < nextCells.length; i++) {
       const isValid = checkValidPawnMove({

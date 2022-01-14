@@ -64,6 +64,7 @@ const pieceValidation = {
   },
 };
 
+<<<<<<< HEAD
 export const validateMoves = (
   chessPosition: Record<string, string>,
   choosenCell: string
@@ -79,5 +80,13 @@ export const validateMoves = (
 
   return pieceValidation[pieceName]
     ? pieceValidation[pieceName](pieceColor, choosenCell, chessPosition)
+=======
+export const validateMoves = ({
+  pieceTypeName,
+  choosenCellPosition,
+}: Record<string, string>) => {
+  return pieceValidation[pieceTypeName]
+    ? pieceValidation[pieceTypeName](choosenCellPosition)
+>>>>>>> pieces-moves
     : null;
 };

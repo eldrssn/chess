@@ -20,12 +20,13 @@ const ACTION_HANDLERS = {
     state: TChessState,
     action: TUpdateChessPositionAction
   ) => {
-    const { choosenPiece, fromCell, moveToCell } = action.payload;
+    const { choosenPieceType, fromCellPosition, toCellPosition } =
+      action.payload;
 
     return {
       ...state,
-      [fromCell]: null,
-      [moveToCell]: choosenPiece,
+      [fromCellPosition]: null,
+      [toCellPosition]: choosenPieceType,
     };
   },
 };

@@ -1,7 +1,6 @@
-import { PIECES_NAMES } from "./constants";
-import { ROW_NUMBERS, COLUMN_CHARS } from "utils/constants";
+import { PIECES_NAMES } from "./utils/constants";
 import { getRookMoves } from "./getRookMoves";
-import { splitColorAndNamePiece } from "./splitColorAndNamePiece";
+import { splitColorAndNamePiece } from "./utils/splitColorAndNamePiece";
 import { getBishopMoves } from "./getBishopMoves";
 import { getKingMoves } from "./getKingMoves";
 import { getKnightMoves } from "./getKnightMoves";
@@ -64,7 +63,6 @@ const pieceValidation = {
   },
 };
 
-<<<<<<< HEAD
 export const validateMoves = (
   chessPosition: Record<string, string>,
   choosenCell: string
@@ -80,13 +78,5 @@ export const validateMoves = (
 
   return pieceValidation[pieceName]
     ? pieceValidation[pieceName](pieceColor, choosenCell, chessPosition)
-=======
-export const validateMoves = ({
-  pieceTypeName,
-  choosenCellPosition,
-}: Record<string, string>) => {
-  return pieceValidation[pieceTypeName]
-    ? pieceValidation[pieceTypeName](choosenCellPosition)
->>>>>>> pieces-moves
     : null;
 };

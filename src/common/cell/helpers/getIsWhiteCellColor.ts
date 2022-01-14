@@ -1,6 +1,6 @@
 import { COLUMN_CHARS } from "utils/constants";
 
-export const getIsWhite = (cell: string) => {
+export const getIsWhiteCellColor = (cell: string) => {
   const char = cell[0];
   const number = cell[1];
 

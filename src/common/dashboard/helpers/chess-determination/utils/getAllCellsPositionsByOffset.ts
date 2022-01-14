@@ -1,6 +1,6 @@
 import { getNextCellPosition } from "./getNextCellPosition";
 
-export const getCellsPositions = (
+export const getAllCellsPositionsByOffset = (
   currentPosition: string,
   offsets: number[][]
 ) => {

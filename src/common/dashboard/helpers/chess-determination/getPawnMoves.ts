@@ -1,12 +1,15 @@
-import { COLUMN_CHARS, ROW_NUMBERS, TURN } from "utils/constants";
-import { blackPawnDefaultRow, whitePawnDefaultRow } from "./constants";
-import { getCellsPositions } from "./getCellsPositions";
-import { getNextCellPosition } from "./getNextCellPosition";
-import { getPawnOffset } from "./getPawnOffset";
-import { isWhiteColor } from "./isWhiteColor";
-import { splitColorAndNamePiece } from "./splitColorAndNamePiece";
+import { TURN } from "utils/constants";
+import {
+  BLACK_PAWN_DEFAULT_ROW,
+  WHITE_PAWN_DEFAULT_ROW,
+} from "./utils/constants";
+import { getAllCellsPositionsByOffset } from "./utils/getAllCellsPositionsByOffset";
+import { getNextCellPosition } from "./utils/getNextCellPosition";
+import { getPawnOffset } from "./utils/getPawnOffset";
+import { isWhiteColor } from "../isWhiteColor";
+import { splitColorAndNamePiece } from "./utils/splitColorAndNamePiece";
 
-// !TODO: оптимизировать как то работу циклов и убрать лишние повторения
+// !TODO: улучшить читаемость кода
 export const getPawnMoves = ({
   currentPosition,
   pieceColor,
@@ -15,7 +18,7 @@ export const getPawnMoves = ({
   const [, currentRow] = currentPosition;
   const isWhite = isWhiteColor(pieceColor);
   const pawnOffset = getPawnOffset(isWhite);
-  const pawnAlwaysOffset = pawnOffset.moves[0][0];
+  const pawnAlwaysOffset = pawnOffset.moves[0][1];
 
   const pawnMoves = [];
 
@@ -47,16 +50,20 @@ export const getPawnMoves = ({
     rowOffset: pawnAlwaysOffset,
   });
 
-  const capturePieceMoves = getCellsPositions(
+  const capturePieceMoves = getAllCellsPositionsByOffset(
     currentPosition,
     pawnOffset.captureMoves
   );
 
   makeCapturePiece({ pawnMoves, capturePieceMoves });
-  checkValidPawnMove({ pawnMoves, nextCell });
 
-  if (currentRow === (isWhite ? whitePawnDefaultRow : blackPawnDefaultRow)) {
-    const nextCells = getCellsPositions(currentPosition, pawnOffset.moves);
+  if (
+    currentRow === (isWhite ? WHITE_PAWN_DEFAULT_ROW : BLACK_PAWN_DEFAULT_ROW)
+  ) {
+    const nextCells = getAllCellsPositionsByOffset(
+      currentPosition,
+      pawnOffset.moves
+    );
 
     for (let i = 0; i < nextCells.length; i++) {
       const isValid = checkValidPawnMove({
@@ -68,6 +75,8 @@ export const getPawnMoves = ({
         break;
       }
     }
+  } else {
+    checkValidPawnMove({ pawnMoves, nextCell });
   }
 
   return pawnMoves;

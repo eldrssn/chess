@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
 
-import { getIsWhite } from "./helpers/getIsWhite";
+import { getIsWhiteCellColor } from "./helpers/getIsWhiteCellColor";
 import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 
 import { CellProps } from "./types";
@@ -33,7 +33,7 @@ export const Cell: FC<CellProps> = ({
     useTypedSelector(selectCurrentMove);
   const chessPosition = useTypedSelector(selectChessPosition);
 
-  const isWhite = getIsWhite(cellPosition);
+  const isWhiteCellColor = getIsWhiteCellColor(cellPosition);
   const dispatch = useDispatch();
 
   const pieceImageSource = getPieceImageSource(pieceType);
@@ -52,8 +52,8 @@ export const Cell: FC<CellProps> = ({
   const onClickCell = () => {
     dispatch(
       setChoosenPiece({
-        fromCell: cellPosition,
-        choosenPiece: pieceType,
+        fromCellPosition: cellPosition,
+        choosenPieceType: pieceType,
       })
     );
 
@@ -87,8 +87,8 @@ export const Cell: FC<CellProps> = ({
   return (
     <div
       className={cn(styles.cell, {
-        [styles.cellBlack]: !isWhite,
-        [styles.cellWhite]: isWhite,
+        [styles.cellBlack]: !isWhiteCellColor,
+        [styles.cellWhite]: isWhiteCellColor,
         [styles.cellActive]: isCanCellClick(),
         [styles.cellPossibleMove]: isPossibleMove(),
       })}

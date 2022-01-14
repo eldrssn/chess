@@ -8,7 +8,7 @@ import { Cell } from "common/cell";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
 
-import { getBoardArray, getPieceTypeName, validateMoves } from "./helpers";
+import { getBoardArray, validateMoves } from "./helpers";
 
 import { CellsEventProps } from "./types";
 
@@ -25,35 +25,14 @@ export const Dashboard = () => {
 
   const chessPosition = useTypedSelector(selectChessPosition);
 
-  const getAllowedCells = useCallback(() => {
-    if (!choosenCell) {
-      return Object.keys(chessPosition).filter((cell) =>
-        chessPosition[cell].includes(chessColor)
+  const getAllowedCellsPositions = useCallback(() => {
+    if (!choosenCellPosition) {
+      return Object.keys(chessPosition).filter((cellPosition) =>
+        chessPosition[cellPosition].includes(chessPlayerColor)
       );
     }
 
-    if (
-      chessPosition[choosenCell] &&
-      (chessPosition[choosenCell].includes("rook") ||
-        chessPosition[choosenCell].includes("bishop") ||
-        chessPosition[choosenCell].includes("queen") ||
-        chessPosition[choosenCell].includes("king") ||
-        chessPosition[choosenCell].includes("knight") ||
-        chessPosition[choosenCell].includes("pawn"))
-    ) {
-      return validateMoves(chessPosition, choosenCell);
-    }
-
-    if (choosenCellPosition) {
-      // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
-      return schema
-        .slice()
-        .filter((cell) =>
-          chessPosition[cell]
-            ? !chessPosition[cell].includes(chessPlayerColor)
-            : cell
-        );
-    }
+    return validateMoves(chessPosition, choosenCellPosition);
   }, [choosenCellPosition]);
 
   const allowedCellsPosition = getAllowedCellsPositions();

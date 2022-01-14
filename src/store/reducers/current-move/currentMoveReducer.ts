@@ -50,11 +50,17 @@ const ACTION_HANDLERS = {
     return state.chessPlayerColor === CHESS_COLORS.WHITE
       ? {
           ...state,
-          captureByWhite: [...state.piecesCaptureByWhiteChess, piece],
+          piecesCaptureByWhiteChess: [
+            ...state.piecesCaptureByWhiteChess,
+            piece,
+          ],
         }
       : {
           ...state,
-          captureByBlack: [...state.piecesCaptureByBlackChess, piece],
+          piecesCaptureByBlackChess: [
+            ...state.piecesCaptureByBlackChess,
+            piece,
+          ],
         };
   },
 };

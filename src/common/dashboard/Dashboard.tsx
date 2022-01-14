@@ -36,10 +36,6 @@ export const Dashboard = () => {
 
   const chessPosition = useTypedSelector(selectChessPosition);
 
-  const pieceName = whatPieceName(chessPosition[choosenCell]);
-
-  console.log(validateMoves(pieceName, choosenCell));
-
   const getAllowedCells = useCallback(() => {
     if (!choosenCell) {
       return Object.keys(chessPosition).filter((cell) =>
@@ -47,8 +43,16 @@ export const Dashboard = () => {
       );
     }
 
-    if (pieceName === "rook") {
-      return validateMoves(pieceName, choosenCell);
+    if (
+      chessPosition[choosenCell] &&
+      (chessPosition[choosenCell].includes("rook") ||
+        chessPosition[choosenCell].includes("bishop") ||
+        chessPosition[choosenCell].includes("queen") ||
+        chessPosition[choosenCell].includes("king") ||
+        chessPosition[choosenCell].includes("knight") ||
+        chessPosition[choosenCell].includes("pawn"))
+    ) {
+      return validateMoves(chessPosition, choosenCell);
     }
 
     if (choosenCell) {

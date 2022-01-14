@@ -1,44 +1,83 @@
 import { PIECES_NAMES } from "./constants";
 import { ROW_NUMBERS, COLUMN_CHARS } from "utils/constants";
-
-// export const COLUMN_CHARS = ["a", "b", "c", "d", "e", "f", "g", "h"];
-// export const ROW_NUMBERS = ["8", "7", "6", "5", "4", "3", "2", "1"];
+import { getRookMoves } from "./getRookMoves";
+import { splitColorAndNamePiece } from "./splitColorAndNamePiece";
+import { getBishopMoves } from "./getBishopMoves";
+import { getKingMoves } from "./getKingMoves";
+import { getKnightMoves } from "./getKnightMoves";
+import { getPawnMoves } from "./getPawnMoves";
 
 const pieceValidation = {
-  [PIECES_NAMES.ROOK]: (position = "ROOK") => {
-    const [column, row] = position; // [a, 1]
-
-    const result = [];
-
-    ROW_NUMBERS.forEach((num) => {
-      result.push(`${column + num}`);
+  [PIECES_NAMES.ROOK]: (
+    pieceColor: string,
+    currentPosition: string,
+    chessPosition: Record<string, string>
+  ) => {
+    return getRookMoves({ currentPosition, pieceColor, chessPosition });
+  },
+  [PIECES_NAMES.BISHOP]: (
+    pieceColor: string,
+    currentPosition: string,
+    chessPosition: Record<string, string>
+  ) => {
+    return getBishopMoves({ currentPosition, pieceColor, chessPosition });
+  },
+  [PIECES_NAMES.QUEEN]: (
+    pieceColor: string,
+    currentPosition: string,
+    chessPosition: Record<string, string>
+  ) => {
+    const rookMoves = getRookMoves({
+      currentPosition,
+      pieceColor,
+      chessPosition,
     });
 
-    COLUMN_CHARS.forEach((char) => {
-      result.push(`${char + row}`);
+    const bishopMoves = getBishopMoves({
+      currentPosition,
+      pieceColor,
+      chessPosition,
     });
 
-    return [...result];
+    return [...rookMoves, ...bishopMoves];
   },
-  [PIECES_NAMES.BISHOP]: (position = "BISHOP") => {
-    return [...position];
+  [PIECES_NAMES.KING]: (
+    pieceColor: string,
+    currentPosition: string,
+    chessPosition: Record<string, string>
+  ) => {
+    return getKingMoves({ currentPosition, pieceColor, chessPosition });
   },
-  [PIECES_NAMES.KING]: (position = "KING") => {
-    return [...position];
+  [PIECES_NAMES.KNIGHT]: (
+    pieceColor: string,
+    currentPosition: string,
+    chessPosition: Record<string, string>
+  ) => {
+    return getKnightMoves({ currentPosition, pieceColor, chessPosition });
   },
-  [PIECES_NAMES.KNIGHT]: (position = "KNIGHT") => {
-    return [...position];
-  },
-  [PIECES_NAMES.PAWN]: (position = "PAWN") => {
-    return [...position];
-  },
-  [PIECES_NAMES.QUEEN]: (position = "QUEEN") => {
-    return [...position];
+  [PIECES_NAMES.PAWN]: (
+    pieceColor: string,
+    currentPosition: string,
+    chessPosition: Record<string, string>
+  ) => {
+    return getPawnMoves({ currentPosition, pieceColor, chessPosition });
   },
 };
 
-export const validateMoves = (pieceName?: string, position?: string) => {
+export const validateMoves = (
+  chessPosition: Record<string, string>,
+  choosenCell: string
+) => {
+  if (!chessPosition[choosenCell]) {
+    return;
+  }
+
+  const [pieceColor, pieceName] = splitColorAndNamePiece(
+    chessPosition,
+    choosenCell
+  );
+
   return pieceValidation[pieceName]
-    ? pieceValidation[pieceName](position)
+    ? pieceValidation[pieceName](pieceColor, choosenCell, chessPosition)
     : null;
 };

@@ -6,3 +6,6 @@ export enum PIECES_NAMES {
   QUEEN = "queen",
   PAWN = "pawn",
 }
+
+export const whitePawnDefaultRow = "2";
+export const blackPawnDefaultRow = "7";

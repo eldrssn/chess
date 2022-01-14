@@ -25,9 +25,9 @@ export interface ICurrentMoveState {
   fromCellPosition: null | string;
   toCellPosition: null | string;
   chessPlayerColor: COLOR;
-  captureByBlackChess: string[];
-  captureByWhiteChess: string[];
+  piecesCaptureByBlackChess: string[];
+  piecesCaptureByWhiteChess: string[];
 }
 
-// !TODO: добавлять сюда все экшены, которые будут или нет?
+// !TODO: добавлять сюда все экшены в дальнейшем
 export type TCurrentMoveActions = IAction<ICurrentMoveState>;

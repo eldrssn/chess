@@ -48,8 +48,14 @@ const ACTION_HANDLERS = {
     const piece = action.payload;
 
     return state.chessPlayerColor === CHESS_COLORS.WHITE
-      ? { ...state, captureByWhite: [...state.captureByWhiteChess, piece] }
-      : { ...state, captureByBlack: [...state.captureByBlackChess, piece] };
+      ? {
+          ...state,
+          captureByWhite: [...state.piecesCaptureByWhiteChess, piece],
+        }
+      : {
+          ...state,
+          captureByBlack: [...state.piecesCaptureByBlackChess, piece],
+        };
   },
 };
 

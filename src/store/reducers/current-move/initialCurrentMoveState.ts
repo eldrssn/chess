@@ -5,6 +5,6 @@ export const initialCurrentMoveState: ICurrentMoveState = {
   fromCellPosition: null,
   toCellPosition: null,
   chessPlayerColor: CHESS_COLORS.WHITE,
-  captureByBlackChess: [],
-  captureByWhiteChess: [],
+  piecesCaptureByBlackChess: [],
+  piecesCaptureByWhiteChess: [],
 };

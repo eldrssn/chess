@@ -11,14 +11,17 @@ import { getPieceImageSource } from "utils/helpers/getPieceImageSource";
 import { TURN } from "utils/constants";
 
 export const InfoBlock: FC<InfoBlockProps> = ({ turn }) => {
-  const { chessPlayerColor, captureByBlackChess, captureByWhiteChess } =
-    useTypedSelector(selectCurrentMove);
+  const {
+    chessPlayerColor,
+    piecesCaptureByBlackChess,
+    piecesCaptureByWhiteChess,
+  } = useTypedSelector(selectCurrentMove);
 
   // !TODO: вынести в отдельную функцию
   const isTurn = chessPlayerColor === turn;
 
   const capturePieces =
-    turn === TURN.BLACK ? captureByBlackChess : captureByWhiteChess;
+    turn === TURN.BLACK ? piecesCaptureByBlackChess : piecesCaptureByWhiteChess;
 
   return (
     <InfoBlockLayout isCurrentTurn={isTurn}>

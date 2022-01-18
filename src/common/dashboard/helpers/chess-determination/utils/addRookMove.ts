@@ -1,13 +1,8 @@
 import { COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
-import { addValidMoves } from "./addValidMoves";
 
-export const addRookMoves = ({
+export const addRookMove = ({
   index,
-  chessPosition,
-  directions,
   direction,
-  pieceColor,
-  pieceMoves,
   currentPosition,
 }) => {
   const [currentColumn, currentRow] = currentPosition;
@@ -24,17 +19,7 @@ export const addRookMoves = ({
   };
 
   const nextCellPosition = getRookNextCellPosition(direction, index);
-  addValidMoves({
-    chessPosition,
-    nextCellPosition,
-    directions,
-    direction,
-    pieceColor,
-    pieceMoves,
-  });
+
+  return nextCellPosition;
 };
 
-// [DIRECTIONS.UP]: (i: number) => `${currentColumn + ROW_NUMBERS[i]}`,
-//     [DIRECTIONS.DOWN]: (i: number) => `${COLUMN_CHARS[i] + currentRow}`,
-//     [DIRECTIONS.LEFT]: (i: number) => `${COLUMN_CHARS[i] + currentRow}`,
-//     [DIRECTIONS.RIGHT]: (i: number) => `${currentColumn + ROW_NUMBERS[i]}`,

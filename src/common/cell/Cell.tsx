@@ -45,6 +45,7 @@ export const Cell: FC<CellProps> = ({
 
   const isPossibleMove = () =>
     // !TODO: переработать эту логику
+    allowedCellsPositions &&
     allowedCellsPositions.includes(cellPosition) &&
     !!choosenPieceType &&
     choosenPieceType?.includes(chessPlayerColor);

@@ -8,6 +8,7 @@ import { getNextCellPosition } from "./utils/getNextCellPosition";
 import { getPawnOffset } from "./utils/getPawnOffset";
 import { isWhiteColor } from "../isWhiteColor";
 import { splitColorAndNamePiece } from "./utils/splitColorAndNamePiece";
+import { isNextCellEmpty } from "./utils/isNextCellEmpty";
 
 // !TODO: улучшить читаемость кода
 export const getPawnMoves = ({
@@ -21,17 +22,6 @@ export const getPawnMoves = ({
   const pawnAlwaysOffset = pawnOffset.moves[0][1];
 
   const pawnMoves = [];
-
-  const checkValidPawnMove = ({ pawnMoves, nextCell }) => {
-    const [nextPieceColor] = splitColorAndNamePiece(chessPosition, nextCell);
-
-    if (nextPieceColor) {
-      return false;
-    }
-
-    pawnMoves.push(nextCell);
-    return true;
-  };
 
   const makeCapturePiece = ({ pawnMoves, capturePieceMoves }) => {
     for (let i = 0; i < capturePieceMoves.length; i++) {
@@ -66,17 +56,20 @@ export const getPawnMoves = ({
     );
 
     for (let i = 0; i < nextCells.length; i++) {
-      const isValid = checkValidPawnMove({
-        pawnMoves,
-        nextCell: nextCells[i],
-      });
+      const isValidMove = isNextCellEmpty(chessPosition, nextCells[i]);
 
-      if (!isValid) {
-        break;
+      if (isValidMove) {
+        pawnMoves.push(nextCells[i]);
+      } else {
+        break
       }
     }
   } else {
-    checkValidPawnMove({ pawnMoves, nextCell });
+    const isValidMove = isNextCellEmpty(chessPosition, nextCell);
+
+    if (isValidMove) {
+      pawnMoves.push(nextCell);
+    }
   }
 
   return pawnMoves;

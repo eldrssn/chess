@@ -76,7 +76,9 @@ export const validateMoves = (
     choosenCell
   );
 
-  return pieceValidation[pieceName]
-    ? pieceValidation[pieceName](pieceColor, choosenCell, chessPosition)
+  const getPieceMoves = pieceValidation[pieceName];
+
+  return getPieceMoves
+    ? getPieceMoves(pieceColor, choosenCell, chessPosition)
     : null;
 };

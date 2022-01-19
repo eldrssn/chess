@@ -58,19 +58,21 @@ export const getPawnMoves = ({
     for (let i = 0; i < nextCells.length; i++) {
       const isValidMove = isNextCellEmpty(chessPosition, nextCells[i]);
 
-      if (isValidMove) {
-        pawnMoves.push(nextCells[i]);
-      } else {
-        break
+      if (!isValidMove) {
+        return;
       }
+      
+      pawnMoves.push(nextCells[i]);
     }
-  } else {
-    const isValidMove = isNextCellEmpty(chessPosition, nextCell);
 
-    if (isValidMove) {
-      pawnMoves.push(nextCell);
-    }
+    return pawnMoves;
+  } 
+
+  const isValidMove = isNextCellEmpty(chessPosition, nextCell);
+
+  if (isValidMove) {
+    pawnMoves.push(nextCell);
   }
-
+  
   return pawnMoves;
 };

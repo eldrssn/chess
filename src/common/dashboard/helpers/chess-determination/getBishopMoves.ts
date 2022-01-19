@@ -16,92 +16,99 @@ export const getBishopMoves = ({
 
   // !TODO: оптимизировать алгоритм
   let j = currentRowIndex - 1;
+  let shouldContinueCheck = true;
   for (let i = currentColumnIndex - 1; i >= 0; i--) {
+    if (shouldContinueCheck) {
+      const nextCellPosition = getBishopNextCellPosition(i, j);
+      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
+      const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
+      const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor);
 
-    const nextCellPosition = getBishopNextCellPosition(i, j);
-
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
-
-    if (isEmptyCell) {
-      bishopMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      bishopMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
+      if (isEmptyCell) {
+        bishopMoves.push(nextCellPosition);
+      }
+      if (isOppositeCellColor) {
+        bishopMoves.push(nextCellPosition);
+        shouldContinueCheck = !isOppositeCellColor;
+      } 
+      if (isSameCellColor) {
+        shouldContinueCheck = !isSameCellColor;
+      }
     }
 
     j--;
   }
 
   j = currentRowIndex + 1;
+  shouldContinueCheck = true;
   for (let i = currentColumnIndex + 1; i < COLUMN_CHARS.length; i++) {
-    const nextCellPosition = getBishopNextCellPosition(i, j);
+    if (shouldContinueCheck) {
+      const nextCellPosition = getBishopNextCellPosition(i, j);
+      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
+      const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
+      const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor);
 
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
-
-    if (isEmptyCell) {
-      bishopMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      bishopMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
+      if (isEmptyCell) {
+        bishopMoves.push(nextCellPosition);
+      }
+      if (isOppositeCellColor) {
+        bishopMoves.push(nextCellPosition);
+        shouldContinueCheck = !isOppositeCellColor;
+      } 
+      if (isSameCellColor) {
+        shouldContinueCheck = !isSameCellColor;
+      }
     }
 
     j++;
   }
 
   j = currentRowIndex - 1;
+  shouldContinueCheck = true;
   for (let i = currentColumnIndex + 1; i < COLUMN_CHARS.length; i++) {
-    const nextCellPosition = getBishopNextCellPosition(i, j);
+    if (shouldContinueCheck) {
+      const nextCellPosition = getBishopNextCellPosition(i, j);
+      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
+      const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
+      const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor);
 
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
-
-    if (isEmptyCell) {
-      bishopMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      bishopMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
+      if (isEmptyCell) {
+        bishopMoves.push(nextCellPosition);
+      }
+      if (isOppositeCellColor) {
+        bishopMoves.push(nextCellPosition);
+        shouldContinueCheck = !isOppositeCellColor;
+      } 
+      if (isSameCellColor) {
+        shouldContinueCheck = !isSameCellColor;
+      }
     }
 
     j--;
   }
 
   j = currentRowIndex + 1;
+  shouldContinueCheck = true;
   for (let i = currentColumnIndex - 1; i >= 0; i--) {
-    const nextCellPosition = getBishopNextCellPosition(i, j);
+    if (shouldContinueCheck) {
+      const nextCellPosition = getBishopNextCellPosition(i, j);
+      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
+      const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
+      const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor);
 
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
-
-    if (isEmptyCell) {
-      bishopMoves.push(nextCellPosition);
+      if (isEmptyCell) {
+        bishopMoves.push(nextCellPosition);
+      }
+      if (isOppositeCellColor) {
+        bishopMoves.push(nextCellPosition);
+        shouldContinueCheck = !isOppositeCellColor;
+      } 
+      if (isSameCellColor) {
+        shouldContinueCheck = !isSameCellColor;
+      }
     }
-    if (isOppositeCellColor) {
-      bishopMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
-    }
 
-    j++;
+    j++;  
   }
 
   return bishopMoves;

@@ -8,7 +8,7 @@ import { Cell } from "common/cell";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
 
-import { getBoardArray, getPieceTypeName, validateMoves } from "./helpers";
+import { getBoardArray, validateMoves } from "./helpers";
 
 import { CellsEventProps } from "./types";
 
@@ -25,8 +25,6 @@ export const Dashboard = () => {
 
   const chessPosition = useTypedSelector(selectChessPosition);
 
-  const pieceTypeName = getPieceTypeName(chessPosition[choosenCellPosition]);
-
   const getAllowedCellsPositions = useCallback(() => {
     if (!choosenCellPosition) {
       return Object.keys(chessPosition).filter((cellPosition) =>
@@ -34,20 +32,7 @@ export const Dashboard = () => {
       );
     }
 
-    if (pieceTypeName === "rook") {
-      return validateMoves({ pieceTypeName, choosenCellPosition });
-    }
-
-    if (choosenCellPosition) {
-      // !TODO: прописать тут проверку на какая эта фигура и ее возможные ходы
-      return schema
-        .slice()
-        .filter((cell) =>
-          chessPosition[cell]
-            ? !chessPosition[cell].includes(chessPlayerColor)
-            : cell
-        );
-    }
+    return validateMoves(chessPosition, choosenCellPosition);
   }, [choosenCellPosition]);
 
   const allowedCellsPosition = getAllowedCellsPositions();

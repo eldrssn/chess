@@ -14,8 +14,8 @@ export enum CHESS_COLORS {
 export type COLOR = CHESS_COLORS;
 
 export type TSetChoosenPiecePayload = {
-  fromCell: string;
-  choosenPiece: string;
+  fromCellPosition: string;
+  choosenPieceType: string;
 };
 
 export type TCapturePiecePayload = string;

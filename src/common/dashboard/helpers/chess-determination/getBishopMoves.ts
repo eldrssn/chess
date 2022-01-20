@@ -14,7 +14,7 @@ export const getBishopMoves = ({
   const currentRowIndex = ROW_NUMBERS.indexOf(currentRow);
   const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
 
-  // !TODO: оптимизировать алгоритм
+  // !TODO: оптимизировать алгоритм, разобраться с логикой работы в циклах
   let j = currentRowIndex - 1;
   let shouldContinueCheck = true;
   for (let i = currentColumnIndex - 1; i >= 0; i--) {

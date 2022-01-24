@@ -1,4 +1,5 @@
 import { COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
+import { getCellPosition } from "./getCellPosition";
 
 export const getNextCellPosition = ({
   currentPosition,
@@ -9,8 +10,8 @@ export const getNextCellPosition = ({
   const currentRowIndex = ROW_NUMBERS.indexOf(currentRow);
   const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
 
-  return `${
-    COLUMN_CHARS[currentColumnIndex + columnOffset] +
+  return getCellPosition(
+    COLUMN_CHARS[currentColumnIndex + columnOffset], 
     ROW_NUMBERS[currentRowIndex + rowOffset]
-  }`;
+  );
 };

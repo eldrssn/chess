@@ -1,8 +1,8 @@
-import { COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
-import { getBishopNextCellPosition } from "./utils/getBishopNextCellPosition";
-import { isNextCellEmpty } from "./utils/isNextCellEmpty";
-import { isNextCellHasOppositeColor } from "./utils/isNextCellHasOppositeColor";
-import { isNextCellHasSameColor } from "./utils/isNextCellHasSameColor";
+import { CHESSBOARD_SIZE, COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
+import { BISHOP_DIRECTIONS } from "./utils/constants";
+import { getCellPosition } from "./utils/getCellPosition";
+import { isCellHasOppositeColor } from "./utils/isCellHasOppositeColor";
+import { isCellHasSameColor } from "./utils/isCellHasSameColor";
 
 export const getBishopMoves = ({
   currentPosition,
@@ -14,172 +14,47 @@ export const getBishopMoves = ({
   const currentRowIndex = ROW_NUMBERS.indexOf(currentRow);
   const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
 
-  // !TODO: оптимизировать алгоритм, разобраться с логикой работы в циклах
-  // сдвигаем позицию влево и вниз
-  // продолжаем ли проверять дальшие позиции по диагонали
-
-  const directions = ["upAndRight", "upAndLeft", "downAndRight", "downAndLeft"];
-
-  const getPositionAfterMove = (position, direction) => {
-    // берем нужную функцию из хелпера с направления движегния и движемся на 1 клеточку по указанному нарпавлению
-
-    return null;
-  };
-
-  const validate = (nextPosition: string, chessPosition, pieceColor) => {
-    return "currentColor";
-  };
-
-  const moveByDirection = (position, direction: string) => {
-    const nextPosition = getPositionAfterMove(position, direction);
-
-    // проверяем что следащая позиция есть или если занятая клетка является того же цвета
-    if (
-      !nextPosition ||
-      (nextPosition && validate(nextPosition, chessPosition) === "currentColor")
-    ) {
-      return;
-    }
-
-    // проверяем что следащая позиция занята противником
-    if (validate(nextPosition, chessPosition, pieceColor) === "oppisiteColor") {
-      bishopMoves.push(nextPosition);
-      return;
-    }
-
-    bishopMoves.push(nextPosition);
-    moveByDirection(nextPosition, direction);
-  };
-
-  directions.map((direction) => moveByDirection(direction, currentPosition));
-
-  for (
-    let i = currentColumnIndex - 1, j = currentRowIndex - 1;
-    i >= 0 && j >= 0;
-    i--, j--
-  ) {
-    const nextCellPosition = getBishopNextCellPosition(i, j);
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(
-      chessPosition,
-      nextCellPosition,
-      pieceColor
-    );
-    const isOppositeCellColor = isNextCellHasOppositeColor(
-      chessPosition,
-      nextCellPosition,
-      pieceColor
-    );
-
-    if (isEmptyCell) {
-      bishopMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      bishopMoves.push(nextCellPosition);
-      shouldContinueCheck = !isOppositeCellColor;
-    }
-    if (isSameCellColor) {
-      shouldContinueCheck = !isSameCellColor;
-    }
+  const bishopNextCellPosition = {
+    upRight: (i: number) => getCellPosition(COLUMN_CHARS[currentColumnIndex + i], ROW_NUMBERS[currentRowIndex + i]),
+    upLeft: (i: number) => getCellPosition(COLUMN_CHARS[currentColumnIndex - i], ROW_NUMBERS[currentRowIndex + i]),
+    downRight: (i: number) =>
+      getCellPosition(COLUMN_CHARS[currentColumnIndex + i], ROW_NUMBERS[currentRowIndex - i]),
+    downLeft: (i: number) =>
+      getCellPosition(COLUMN_CHARS[currentColumnIndex - i], ROW_NUMBERS[currentRowIndex - i]),
   }
 
-  let j = currentRowIndex + 1;
-  let shouldContinueCheck = true;
-  for (let i = currentColumnIndex + 1; i < COLUMN_CHARS.length; i++) {
-    if (shouldContinueCheck) {
-      const nextCellPosition = getBishopNextCellPosition(i, j);
+  const getBishopNextCellPosition = (direction: string, i: number) => {
+    return bishopNextCellPosition[direction](i);
+  }
 
-      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-      const isSameCellColor = isNextCellHasSameColor(
-        chessPosition,
-        nextCellPosition,
-        pieceColor
-      );
-      const isOppositeCellColor = isNextCellHasOppositeColor(
-        chessPosition,
-        nextCellPosition,
-        pieceColor
-      );
+  const moveByDirection = (direction: string) => {
+    for (let i = 1; i < CHESSBOARD_SIZE; i++) {
+      const nextPosition =  getBishopNextCellPosition(direction, i);
 
-      if (isEmptyCell) {
+      if (isCellHasOppositeColor(
+          chessPosition,
+          nextPosition,
+          pieceColor
+        )) {
+          bishopMoves.push(nextPosition);
+          return;
+
+      }
+      if (isCellHasSameColor(
+          chessPosition,
+          nextPosition,
+          pieceColor
+        )) {
         return;
-        bishopMoves.push(nextCellPosition);
       }
-      if (isOppositeCellColor) {
-        bishopMoves.push(nextCellPosition);
-        shouldContinueCheck = !isOppositeCellColor;
-      }
-      if (isSameCellColor) {
-        shouldContinueCheck = !isSameCellColor;
+
+      if (nextPosition) {
+        bishopMoves.push(nextPosition);
       }
     }
+  };
 
-    j++;
-  }
-
-  j = currentRowIndex - 1;
-  shouldContinueCheck = true;
-  for (let i = currentColumnIndex + 1; i < COLUMN_CHARS.length; i++) {
-    if (shouldContinueCheck) {
-      const nextCellPosition = getBishopNextCellPosition(i, j);
-      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-      const isSameCellColor = isNextCellHasSameColor(
-        chessPosition,
-        nextCellPosition,
-        pieceColor
-      );
-      const isOppositeCellColor = isNextCellHasOppositeColor(
-        chessPosition,
-        nextCellPosition,
-        pieceColor
-      );
-
-      if (isEmptyCell) {
-        bishopMoves.push(nextCellPosition);
-      }
-      if (isOppositeCellColor) {
-        bishopMoves.push(nextCellPosition);
-        shouldContinueCheck = !isOppositeCellColor;
-      }
-      if (isSameCellColor) {
-        shouldContinueCheck = !isSameCellColor;
-      }
-    }
-
-    j--;
-  }
-
-  j = currentRowIndex + 1;
-  shouldContinueCheck = true;
-  for (let i = currentColumnIndex - 1; i >= 0; i--) {
-    if (shouldContinueCheck) {
-      const nextCellPosition = getBishopNextCellPosition(i, j);
-      const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-      const isSameCellColor = isNextCellHasSameColor(
-        chessPosition,
-        nextCellPosition,
-        pieceColor
-      );
-      const isOppositeCellColor = isNextCellHasOppositeColor(
-        chessPosition,
-        nextCellPosition,
-        pieceColor
-      );
-
-      if (isEmptyCell) {
-        bishopMoves.push(nextCellPosition);
-      }
-      if (isOppositeCellColor) {
-        bishopMoves.push(nextCellPosition);
-        shouldContinueCheck = !isOppositeCellColor;
-      }
-      if (isSameCellColor) {
-        shouldContinueCheck = !isSameCellColor;
-      }
-    }
-
-    j++;
-  }
+  BISHOP_DIRECTIONS.map((direction) => moveByDirection(direction));
 
   return bishopMoves;
 };

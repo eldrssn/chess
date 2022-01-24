@@ -1,9 +1,8 @@
-import { COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
-import { addRookMove } from "./utils/addRookMove";
-import { DIRECTIONS } from "./utils/constants";
-import { isNextCellEmpty } from "./utils/isNextCellEmpty";
-import { isNextCellHasOppositeColor } from "./utils/isNextCellHasOppositeColor";
-import { isNextCellHasSameColor } from "./utils/isNextCellHasSameColor";
+import { CHESSBOARD_SIZE, COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
+import { ROOK_DIRECTIONS } from "./utils/constants";
+import { getCellPosition } from "./utils/getCellPosition";
+import { isCellHasOppositeColor } from "./utils/isCellHasOppositeColor";
+import { isCellHasSameColor } from "./utils/isCellHasSameColor";
 
 export const getRookMoves = ({
   currentPosition,
@@ -15,99 +14,45 @@ export const getRookMoves = ({
   const currentRowIndex = ROW_NUMBERS.indexOf(currentRow);
   const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
 
+  const rookNextCellPosition = {
+    up: (i: number) => getCellPosition(currentColumn, ROW_NUMBERS[currentRowIndex + i]),
+    down: (i: number) => getCellPosition(currentColumn, ROW_NUMBERS[currentRowIndex - i]),
+    left: (i: number) => getCellPosition(COLUMN_CHARS[currentColumnIndex - i], currentRow),
+    right: (i: number) => getCellPosition(COLUMN_CHARS[currentColumnIndex + i], currentRow),
+  };
 
-  // !TODO: оптимизировать алгоритм
-  for (let i = currentRowIndex - 1; i >= 0; i--) {
-    const nextCellPosition = addRookMove({
-      index: i,
-      direction: DIRECTIONS.UP,
-      currentPosition,
-    })
-    
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
+  const getRookNextCellPosition = (direction: string, i: number) => {
+    return rookNextCellPosition[direction](i);
+  };
 
-    if (isEmptyCell) {
-      rookMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      rookMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
-    }
-  }
+  const moveByDirection = (direction: string) => {
+    for (let i = 1; i < CHESSBOARD_SIZE; i++) {
+      const nextPosition =  getRookNextCellPosition(direction, i);
 
-  for (let i = currentRowIndex + 1; i < ROW_NUMBERS.length; i++) {
-    const nextCellPosition = addRookMove({
-      index: i,
-      direction: DIRECTIONS.RIGHT,
-      currentPosition,
-    })
-    
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
+      if (isCellHasOppositeColor(
+          chessPosition,
+          nextPosition,
+          pieceColor
+        )) {
+          rookMoves.push(nextPosition);
+          return;
+      }
 
-    if (isEmptyCell) {
-      rookMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      rookMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
-    }
-  }
+      if (isCellHasSameColor(
+          chessPosition,
+          nextPosition,
+          pieceColor
+        )) {
+        return;
+      }
 
-  for (let i = currentColumnIndex - 1; i >= 0; i--) {
-    const nextCellPosition = addRookMove({
-      index: i,
-      direction: DIRECTIONS.LEFT,
-      currentPosition,
-    })
-    
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
+      if (nextPosition) {
+        rookMoves.push(nextPosition);
+      }
+    }
+  };
 
-    if (isEmptyCell) {
-      rookMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      rookMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
-    }
-  }
-
-  for (let i = currentColumnIndex + 1; i < ROW_NUMBERS.length; i++) {
-    const nextCellPosition = addRookMove({
-      index: i,
-      direction: DIRECTIONS.DOWN,
-      currentPosition,
-    })
-    
-    const isEmptyCell = isNextCellEmpty(chessPosition, nextCellPosition);
-    const isSameCellColor = isNextCellHasSameColor(chessPosition, nextCellPosition, pieceColor);
-    const isOppositeCellColor = isNextCellHasOppositeColor(chessPosition, nextCellPosition, pieceColor)
-
-    if (isEmptyCell) {
-      rookMoves.push(nextCellPosition);
-    }
-    if (isOppositeCellColor) {
-      rookMoves.push(nextCellPosition);
-      break;
-    } 
-    if (isSameCellColor) {
-      break;
-    }
-  }
+  ROOK_DIRECTIONS.map((direction) => moveByDirection(direction))
 
   return rookMoves;
 };

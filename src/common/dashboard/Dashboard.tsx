@@ -32,7 +32,7 @@ export const Dashboard = () => {
       );
     }
 
-    return validateMoves(chessPosition, choosenCellPosition);
+    return validateMoves({ chessPosition, cell: choosenCellPosition });
   }, [choosenCellPosition]);
 
   const allowedCellsPosition = getAllowedCellsPositions();

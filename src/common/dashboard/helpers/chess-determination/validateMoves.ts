@@ -5,6 +5,7 @@ import { getBishopMoves } from "./getBishopMoves";
 import { getKingMoves } from "./getKingMoves";
 import { getKnightMoves } from "./getKnightMoves";
 import { getPawnMoves } from "./getPawnMoves";
+import { IValidateMoves } from "./types";
 
 const pieceValidation = {
   [PIECES_NAMES.ROOK]: (
@@ -63,20 +64,18 @@ const pieceValidation = {
   },
 };
 
-export const validateMoves = (
-  chessPosition: Record<string, string>,
-  choosenCell: string
-) => {
-  if (!chessPosition[choosenCell]) {
+export const validateMoves = ({ chessPosition, cell }: IValidateMoves) => {
+  if (!chessPosition[cell]) {
     return;
   }
 
-  const [pieceColor, pieceName] = splitColorAndNamePiece(
+  const [pieceColor, pieceName] = splitColorAndNamePiece({
     chessPosition,
-    choosenCell
-  );
+    cell,
+  });
 
-  const getPieceMoves = pieceValidation[pieceName](pieceColor, choosenCell, chessPosition) || null;
+  const getPieceMoves =
+    pieceValidation[pieceName](pieceColor, cell, chessPosition) || null;
 
   return getPieceMoves;
 };

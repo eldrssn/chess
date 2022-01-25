@@ -10,8 +10,8 @@ export const getNextCellPosition = ({
   const currentRowIndex = ROW_NUMBERS.indexOf(currentRow);
   const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
 
-  return getCellPosition(
-    COLUMN_CHARS[currentColumnIndex + columnOffset], 
-    ROW_NUMBERS[currentRowIndex + rowOffset]
-  );
+  return getCellPosition({
+    char: COLUMN_CHARS[currentColumnIndex + columnOffset],
+    number: ROW_NUMBERS[currentRowIndex + rowOffset],
+  });
 };

@@ -24,54 +24,54 @@ export const getPawnMoves = ({
 
   const makeCapturePiece = ({ pawnMoves, capturePieceMoves }) => {
     for (let i = 0; i < capturePieceMoves.length; i++) {
-      const [nextPieceColor] = splitColorAndNamePiece(
+      const [nextPieceColor] = splitColorAndNamePiece({
         chessPosition,
-        capturePieceMoves[i]
-      );
+        cell: capturePieceMoves[i],
+      });
       if (nextPieceColor === (isWhite ? TURN.BLACK : TURN.WHITE)) {
         pawnMoves.push(capturePieceMoves[i]);
       }
     }
   };
 
-  const capturePieceMoves = getAllCellsPositionsByOffset(
+  const capturePieceMoves = getAllCellsPositionsByOffset({
     currentPosition,
-    pawnOffset.captureMoves
-  );
+    offsets: pawnOffset.captureMoves,
+  });
 
   makeCapturePiece({ pawnMoves, capturePieceMoves });
 
   if (
     currentRow === (isWhite ? WHITE_PAWN_DEFAULT_ROW : BLACK_PAWN_DEFAULT_ROW)
   ) {
-    const nextCells = getAllCellsPositionsByOffset(
+    const nextCells = getAllCellsPositionsByOffset({
       currentPosition,
-      pawnOffset.moves
-    );
+      offsets: pawnOffset.moves,
+    });
 
     for (let i = 0; i < nextCells.length; i++) {
-      const isValidMove = isCellEmpty(chessPosition, nextCells[i]);
+      const isValidMove = isCellEmpty({ chessPosition, cell: nextCells[i] });
 
       if (!isValidMove) {
         return;
       }
-      
+
       pawnMoves.push(nextCells[i]);
     }
 
     return pawnMoves;
-  } 
+  }
 
   const nextCell = getNextCellPosition({
     currentPosition,
     rowOffset: pawnAlwaysOffset,
   });
 
-  const isValidMove = isCellEmpty(chessPosition, nextCell);
+  const isValidMove = isCellEmpty({ chessPosition, cell: nextCell });
 
   if (isValidMove) {
     pawnMoves.push(nextCell);
   }
-  
+
   return pawnMoves;
 };

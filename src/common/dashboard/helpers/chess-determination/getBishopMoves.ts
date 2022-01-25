@@ -1,4 +1,5 @@
 import { CHESSBOARD_SIZE, COLUMN_CHARS, ROW_NUMBERS } from "utils/constants";
+import { IGetBishopNextCellPosition } from "./types";
 import { BISHOP_DIRECTIONS } from "./utils/constants";
 import { getCellPosition } from "./utils/getCellPosition";
 import { isCellHasOppositeColor } from "./utils/isCellHasOppositeColor";
@@ -15,41 +16,61 @@ export const getBishopMoves = ({
   const currentColumnIndex = COLUMN_CHARS.indexOf(currentColumn);
 
   const bishopNextCellPosition = {
-    upRight: (i: number) => getCellPosition(COLUMN_CHARS[currentColumnIndex + i], ROW_NUMBERS[currentRowIndex + i]),
-    upLeft: (i: number) => getCellPosition(COLUMN_CHARS[currentColumnIndex - i], ROW_NUMBERS[currentRowIndex + i]),
+    upRight: (i: number) =>
+      getCellPosition({
+        char: COLUMN_CHARS[currentColumnIndex + i],
+        number: ROW_NUMBERS[currentRowIndex + i],
+      }),
+    upLeft: (i: number) =>
+      getCellPosition({
+        char: COLUMN_CHARS[currentColumnIndex - i],
+        number: ROW_NUMBERS[currentRowIndex + i],
+      }),
     downRight: (i: number) =>
-      getCellPosition(COLUMN_CHARS[currentColumnIndex + i], ROW_NUMBERS[currentRowIndex - i]),
+      getCellPosition({
+        char: COLUMN_CHARS[currentColumnIndex + i],
+        number: ROW_NUMBERS[currentRowIndex - i],
+      }),
     downLeft: (i: number) =>
-      getCellPosition(COLUMN_CHARS[currentColumnIndex - i], ROW_NUMBERS[currentRowIndex - i]),
-  }
+      getCellPosition({
+        char: COLUMN_CHARS[currentColumnIndex - i],
+        number: ROW_NUMBERS[currentRowIndex - i],
+      }),
+  };
 
-  const getBishopNextCellPosition = (direction: string, i: number) => {
+  const getBishopNextCellPosition = ({
+    direction,
+    i,
+  }: IGetBishopNextCellPosition) => {
     return bishopNextCellPosition[direction](i);
-  }
+  };
 
   const moveByDirection = (direction: string) => {
     for (let i = 1; i < CHESSBOARD_SIZE; i++) {
-      const nextPosition =  getBishopNextCellPosition(direction, i);
+      const nextCellPosition = getBishopNextCellPosition({ direction, i });
 
-      if (isCellHasOppositeColor(
+      if (
+        isCellHasOppositeColor({
           chessPosition,
-          nextPosition,
-          pieceColor
-        )) {
-          bishopMoves.push(nextPosition);
-          return;
-
+          cell: nextCellPosition,
+          pieceColor,
+        })
+      ) {
+        bishopMoves.push(nextCellPosition);
+        return;
       }
-      if (isCellHasSameColor(
+      if (
+        isCellHasSameColor({
           chessPosition,
-          nextPosition,
-          pieceColor
-        )) {
+          cell: nextCellPosition,
+          pieceColor,
+        })
+      ) {
         return;
       }
 
-      if (nextPosition) {
-        bishopMoves.push(nextPosition);
+      if (nextCellPosition) {
+        bishopMoves.push(nextCellPosition);
       }
     }
   };

@@ -6,10 +6,10 @@ export const filterPossibleMoves = ({
   pieceColor,
 }) => {
   return allPossibleMoves.filter((cellPosition: string) => {
-    const [nextPieceColor] = splitColorAndNamePiece(
+    const [nextPieceColor] = splitColorAndNamePiece({
       chessPosition,
-      cellPosition
-    );
+      cell: cellPosition,
+    });
     return nextPieceColor !== pieceColor;
   });
 };

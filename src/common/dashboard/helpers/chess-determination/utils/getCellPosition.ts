@@ -1,5 +1,7 @@
-export const getCellPosition = (char: string, number: string) => {
+import { IGetCellPosition } from "./types";
+
+export const getCellPosition = ({ char, number }: IGetCellPosition) => {
   if (char && number) {
-    return `${char}${number}`
+    return `${char}${number}`;
   }
 };

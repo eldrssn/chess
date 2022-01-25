@@ -1,8 +1,8 @@
 import { splitColorAndNamePiece } from "./splitColorAndNamePiece";
+import { IIsCellEmpty } from "./types";
 
-// !TODO: избавиться от сайд-эффектов (если они тут есть)
-export const isCellEmpty = (chessPosition: Record<string, string>, cell: string) => {
-  const [nextPieceColor] = splitColorAndNamePiece(chessPosition, cell);
+export const isCellEmpty = ({ chessPosition, cell }: IIsCellEmpty) => {
+  const [nextPieceColor] = splitColorAndNamePiece({ chessPosition, cell });
 
   return !nextPieceColor;
 };

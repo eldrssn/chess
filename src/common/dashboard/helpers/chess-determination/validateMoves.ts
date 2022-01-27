@@ -5,78 +5,77 @@ import { getBishopMoves } from "./getBishopMoves";
 import { getKingMoves } from "./getKingMoves";
 import { getKnightMoves } from "./getKnightMoves";
 import { getPawnMoves } from "./getPawnMoves";
+import { IPieceValidation, IValidateMoves } from "./types";
 
 const pieceValidation = {
-  [PIECES_NAMES.ROOK]: (
-    pieceColor: string,
-    currentPosition: string,
-    chessPosition: Record<string, string>
-  ) => {
-    return getRookMoves({ currentPosition, pieceColor, chessPosition });
+  [PIECES_NAMES.ROOK]: ({
+    pieceColor,
+    cell,
+    chessPosition,
+  }: IPieceValidation) => {
+    return getRookMoves({ currentPosition: cell, pieceColor, chessPosition });
   },
-  [PIECES_NAMES.BISHOP]: (
-    pieceColor: string,
-    currentPosition: string,
-    chessPosition: Record<string, string>
-  ) => {
-    return getBishopMoves({ currentPosition, pieceColor, chessPosition });
+  [PIECES_NAMES.BISHOP]: ({
+    pieceColor,
+    cell,
+    chessPosition,
+  }: IPieceValidation) => {
+    return getBishopMoves({ currentPosition: cell, pieceColor, chessPosition });
   },
-  [PIECES_NAMES.QUEEN]: (
-    pieceColor: string,
-    currentPosition: string,
-    chessPosition: Record<string, string>
-  ) => {
+  [PIECES_NAMES.QUEEN]: ({
+    pieceColor,
+    cell,
+    chessPosition,
+  }: IPieceValidation) => {
     const rookMoves = getRookMoves({
-      currentPosition,
+      currentPosition: cell,
       pieceColor,
       chessPosition,
     });
 
     const bishopMoves = getBishopMoves({
-      currentPosition,
+      currentPosition: cell,
       pieceColor,
       chessPosition,
     });
 
     return [...rookMoves, ...bishopMoves];
   },
-  [PIECES_NAMES.KING]: (
-    pieceColor: string,
-    currentPosition: string,
-    chessPosition: Record<string, string>
-  ) => {
-    return getKingMoves({ currentPosition, pieceColor, chessPosition });
+  [PIECES_NAMES.KING]: ({
+    pieceColor,
+    cell,
+    chessPosition,
+  }: IPieceValidation) => {
+    return getKingMoves({ currentPosition: cell, pieceColor, chessPosition });
   },
-  [PIECES_NAMES.KNIGHT]: (
-    pieceColor: string,
-    currentPosition: string,
-    chessPosition: Record<string, string>
-  ) => {
-    return getKnightMoves({ currentPosition, pieceColor, chessPosition });
+  [PIECES_NAMES.KNIGHT]: ({
+    pieceColor,
+    cell,
+    chessPosition,
+  }: IPieceValidation) => {
+    return getKnightMoves({ currentPosition: cell, pieceColor, chessPosition });
   },
-  [PIECES_NAMES.PAWN]: (
-    pieceColor: string,
-    currentPosition: string,
-    chessPosition: Record<string, string>
-  ) => {
-    return getPawnMoves({ currentPosition, pieceColor, chessPosition });
+  [PIECES_NAMES.PAWN]: ({
+    pieceColor,
+    cell,
+    chessPosition,
+  }: IPieceValidation) => {
+    return getPawnMoves({ currentPosition: cell, pieceColor, chessPosition });
   },
 };
 
-export const validateMoves = (
-  chessPosition: Record<string, string>,
-  choosenCell: string
-) => {
-  if (!chessPosition[choosenCell]) {
+export const validateMoves = ({ chessPosition, cell }: IValidateMoves) => {
+  if (!chessPosition[cell]) {
     return;
   }
 
-  const [pieceColor, pieceName] = splitColorAndNamePiece(
+  const [pieceColor, pieceName] = splitColorAndNamePiece({
     chessPosition,
-    choosenCell
-  );
+    cell,
+  });
 
-  const getPieceMoves = pieceValidation[pieceName](pieceColor, choosenCell, chessPosition) || null;
+  const getPieceMoves =
+    pieceValidation[pieceName]({ pieceColor, cell, chessPosition }) || null;
 
   return getPieceMoves;
 };

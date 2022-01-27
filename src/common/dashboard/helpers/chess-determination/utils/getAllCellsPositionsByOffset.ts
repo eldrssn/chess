@@ -1,9 +1,10 @@
 import { getNextCellPosition } from "./getNextCellPosition";
+import { IGetAllCellsPositionsByOffset } from "./types";
 
-export const getAllCellsPositionsByOffset = (
-  currentPosition: string,
-  offsets: number[][]
-) => {
+export const getAllCellsPositionsByOffset = ({
+  currentPosition,
+  offsets,
+}: IGetAllCellsPositionsByOffset) => {
   return offsets.map((offset) => {
     const [columnOffset, rowOffset] = offset;
 

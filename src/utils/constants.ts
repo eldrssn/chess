@@ -10,3 +10,5 @@ export enum TURN {
   WHITE = "white",
   BLACK = "black",
 }
+
+export const CHESSBOARD_SIZE = 8;

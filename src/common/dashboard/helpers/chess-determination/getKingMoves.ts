@@ -7,10 +7,10 @@ export const getKingMoves = ({
   pieceColor,
   chessPosition,
 }) => {
-  const kingAllPossibleMoves = getAllCellsPositionsByOffset(
+  const kingAllPossibleMoves = getAllCellsPositionsByOffset({
     currentPosition,
-    KING_OFFSET_POSITIONS
-  );
+    offsets: KING_OFFSET_POSITIONS,
+  });
 
   const kingMoves = filterPossibleMoves({
     allPossibleMoves: kingAllPossibleMoves,

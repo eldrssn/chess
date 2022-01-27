@@ -1,9 +1,11 @@
-export interface IIsCellEmpty {
+export interface IValidateCellPosition {
   chessPosition: Record<string, string>;
   cell: string;
 }
 
-export interface IIsCellHasColor extends IIsCellEmpty {
+export interface IIsCellEmpty extends IValidateCellPosition {}
+
+export interface IIsCellHasColor extends IValidateCellPosition {
   pieceColor: string;
 }
 
@@ -17,4 +19,4 @@ export interface IGetAllCellsPositionsByOffset {
   offsets: number[][];
 }
 
-export interface ISplitColorAndNamePiece extends IIsCellEmpty {}
+export interface ISplitColorAndNamePiece extends IValidateCellPosition {}

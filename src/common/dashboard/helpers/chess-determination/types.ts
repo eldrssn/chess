@@ -1,4 +1,4 @@
-import { IIsCellEmpty } from "./utils/types";
+import { IValidateCellPosition } from "./utils/types";
 
 export interface IGetRookNextCellPosition {
   direction: string;
@@ -7,10 +7,8 @@ export interface IGetRookNextCellPosition {
 
 export interface IGetBishopNextCellPosition extends IGetRookNextCellPosition {}
 
-export interface IPieceValidation {
+export interface IPieceValidation extends IValidateCellPosition {
   pieceColor: string;
-  currentPosition: string;
-  chessPosition: Record<string, string>;
 }
 
-export interface IValidateMoves extends IIsCellEmpty {}
+export interface IValidateMoves extends IValidateCellPosition {}

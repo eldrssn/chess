@@ -6,8 +6,6 @@ export const isChoosenCell = ({
   piece,
   chessColor,
 }: isChoosenCellProps) => {
-  console.log(piece);
-
   if (typeof piece === "string") {
     return (
       choosenCell === cell &&

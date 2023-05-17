@@ -7,7 +7,7 @@ import { UsernameField } from "common/username-field";
 export const Header: React.FC = () => {
   return (
     <HeaderLayout>
-      <h1 className={styles.mainTitle}>Шахматы</h1>
+      <h1 className={styles.mainTitle}>Chess</h1>
       <UsernameField />
     </HeaderLayout>
   );

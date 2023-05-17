@@ -19,13 +19,14 @@ export const InfoBlock: FC<InfoBlockProps> = ({ turn }) => {
 
   // !TODO: вынести в отдельную функцию
   const isTurn = chessPlayerColor === turn;
+  const isBlack = turn === TURN.BLACK;
 
   const capturePieces =
-    turn === TURN.BLACK ? piecesCaptureByBlackChess : piecesCaptureByWhiteChess;
+  isBlack ? piecesCaptureByBlackChess : piecesCaptureByWhiteChess;
 
   return (
     <InfoBlockLayout isCurrentTurn={isTurn}>
-      <p>тут чей ход</p>
+      <p>Player {isBlack ? 2 : 1}</p>
       <div className={styles.pieceWrapper}>
         {capturePieces.map((piece, index) => {
           return (

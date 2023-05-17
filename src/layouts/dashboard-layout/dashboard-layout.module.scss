@@ -1,12 +1,9 @@
 .dashboard {
-  width: 750px;
-  margin: 60px auto;
+  margin: auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
-  background-color: #ffffffc4;
-  border-radius: 20px;
-  height: calc(100vh - 200px);
-  width: calc(100vw - 100px);
+  background-color: #ffffff3f;
+  height: calc(100vh - 80px);
 }

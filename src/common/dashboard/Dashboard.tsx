@@ -9,7 +9,6 @@ import { Cell } from "common/cell";
 import { useTypedSelector } from "hooks/useTypedSelector";
 
 import { getBoardArray, validateMoves } from "./helpers";
-
 import { CellsEventProps } from "./types";
 
 export const Dashboard = () => {

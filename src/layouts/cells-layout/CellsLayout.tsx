@@ -1,11 +1,9 @@
 import React, { FC } from "react";
-import styles from "./cells-layout.module.scss";
 import { CellsLayoutProps } from "./types";
+import styles from "./cells-layout.module.scss";
 
-export const CellsLayout: FC<CellsLayoutProps> = ({ onClick, children }) => {
-  return (
+export const CellsLayout: FC<CellsLayoutProps> = ({ onClick, children }) => (
     <div onClick={onClick} className={styles.cells}>
-      {children}
+        {children}
     </div>
-  );
-};
+);

@@ -29,5 +29,4 @@ export interface ICurrentMoveState {
   piecesCaptureByWhiteChess: string[];
 }
 
-// !TODO: добавлять сюда все экшены в дальнейшем
 export type TCurrentMoveActions = IAction<ICurrentMoveState>;

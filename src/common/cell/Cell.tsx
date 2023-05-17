@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-
 import classNames from "classnames/bind";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
@@ -44,7 +43,6 @@ export const Cell: FC<CellProps> = ({
     pieceType.includes(chessPlayerColor);
 
   const isPossibleMove = () =>
-    // !TODO: переработать эту логику
     allowedCellsPositions &&
     allowedCellsPositions.includes(cellPosition) &&
     !!choosenPieceType &&
@@ -59,7 +57,6 @@ export const Cell: FC<CellProps> = ({
     );
 
     if (
-      // !TODO: переработать эту логику
       choosenCellPosition &&
       fromCellPosition &&
       choosenPieceType &&

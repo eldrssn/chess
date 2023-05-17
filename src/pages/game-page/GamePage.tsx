@@ -7,15 +7,13 @@ import { Dashboard } from "common/dashboard";
 import { InfoBlock } from "common/info-block";
 import { CHESS_COLORS } from "store/reducers/current-move/types";
 
-export const GamePage: React.FC = () => {
-  return (
+export const GamePage: React.FC = () => (
     <>
-      <Header />
-      <DashboardLayout>
-        <InfoBlock turn={CHESS_COLORS.BLACK} />
-        <Dashboard />
-        <InfoBlock turn={CHESS_COLORS.WHITE} />
-      </DashboardLayout>
+        <Header />
+        <DashboardLayout>
+            <InfoBlock turn={CHESS_COLORS.BLACK} />
+            <Dashboard />
+            <InfoBlock turn={CHESS_COLORS.WHITE} />
+        </DashboardLayout>
     </>
-  );
-};
+);

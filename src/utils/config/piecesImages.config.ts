@@ -10,5 +10,5 @@ export const piecesImages = {
   black_knight: "public/assets/svg/chess/knightBlack.svg",
   black_bishop: "public/assets/svg/chess/bishopBlack.svg",
   black_king: "public/assets/svg/chess/kingBlack.svg",
-  black_queen: "public/assets/svg/chess/queenBlack.svg",
+  black_queen: "public/assets/svg/chess/queenBlack.svg", 
 };

@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -13,6 +14,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public/index.html"),
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src/assets"),
+          to: path.resolve(__dirname, "dist/assets"),
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -22,11 +31,6 @@ module.exports = {
         exclude: [/node_modules/],
       },
       { test: /\.ts|tsx$/, use: "ts-loader" },
-      // {
-      //   test: /\.ts|tsx$/,
-      //   exclude: /node_modules/,
-      //   loader: "babel-loader",
-      // },
       {
         test: /\.css$/i,
         use: [

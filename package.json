@@ -23,6 +23,7 @@
     "@types/react-redux": "^7.1.21",
     "@types/redux": "^3.6.0",
     "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.5.1",
     "css-modules-typescript-loader": "^4.0.1",
     "html-webpack-plugin": "^5.5.0",

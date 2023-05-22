@@ -1,7 +1,8 @@
 @import "assets/styles/vars";
 
 .info-block {
-  width: 640px;
+  width: calc(100vw - 50px);
+  max-width: 450px;
   border: 5px solid transparent;
   border-radius: 20px;
   margin: 20px auto;

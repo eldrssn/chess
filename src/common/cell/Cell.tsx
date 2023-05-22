@@ -99,8 +99,8 @@ export const Cell: FC<CellProps> = ({
           className={styles.pieceImg}
           src={pieceImageSource}
           alt="piece"
-          width={60}
-          height={60}
+          width={40}
+          height={40}
         />
       )}
       <span>{cellPosition}</span>
